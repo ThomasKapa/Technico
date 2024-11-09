@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 public class Property {
 
-    private String propertyId;
+    private Long propertyId;
     private String propertyIdentificationE9Number;
     private String propertyAddress;
     private String yearOfConstruction;

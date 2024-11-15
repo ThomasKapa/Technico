@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Repair {
 
+    private long RepairId;
     private LocalDateTime scheduledRepairDate;
     private RepairStatus repairStatus;
     private RepairType repairType;

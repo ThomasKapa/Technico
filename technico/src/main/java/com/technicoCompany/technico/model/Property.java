@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.model;
 
+import com.technicoCompany.technico.enums.PropertyType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,6 @@ public class Property {
     private String propertyIdentificationE9Number;
     private String propertyAddress;
     private String yearOfConstruction;
-    private String propertyType;
+    private PropertyType propertyType;
     private PropertyOwner propertyOwner;
 }

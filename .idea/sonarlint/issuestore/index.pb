@@ -501,3 +501,5 @@ y
 Itechnico/src/main/java/com/technicoCompany/technico/enums/RepairType.java,9\8\9821845fce14709d4494f7b342fbc22de525a221
 w
 Gtechnico/src/main/java/com/technicoCompany/technico/enums/UserRole.java,f\e\fea4214489c7eb8956f69833b838e2ec5a3cf656
+{
+Ktechnico/src/main/java/com/technicoCompany/technico/enums/PropertyType.java,1\d\1d3f445862258eb3ba6da9780f2470e61218de17

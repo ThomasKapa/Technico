@@ -7,10 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
-
-import java.awt.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Component
 @Data
@@ -19,7 +18,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Repair {
 
-    private LocalDateTime scheduledRepairDate;
+    private Date scheduledRepairDate;
     private RepairStatus repairStatus;
     private RepairType repairType;
     private BigDecimal repairCost;

@@ -16,19 +16,52 @@ public class UserServiceImpl implements UserService {
     @Override
     public PropertyOwner createUser(PropertyOwner propertyOwner) {
 
+        //check for empty or null vat number given
+        if (propertyOwner.getOwnerVatNumber() == null || propertyOwner.getOwnerVatNumber().isEmpty()) {
+            throw new IllegalArgumentException("VAT number cannot be null or empty");
+        }
+        //        Email checking
+        //        The following restrictions are imposed in the email address’ local part by using this regex:
+        //        It allows numeric values from 0 to 9.
+        //        Both uppercase and lowercase letters from a to z are allowed.
+        //        Allowed are underscore “_”, hyphen “-“, and dot “.”
+        //        Dot isn’t allowed at the start and end of the local part.
+        //        Consecutive dots aren’t allowed.
+        //        For the local part, a maximum of 64 characters are allowed.
+        //
+        //        Restrictions for the domain part in this regular expression include:
+        //        It allows numeric values from 0 to 9.
+        //        We allow both uppercase and lowercase letters from a to z.
+        //        Hyphen “-” and dot “.” aren’t allowed at the start and end of the domain part.
+        //        No consecutive dots.
+        if (propertyOwner.getOwnerEmail() == null || !propertyOwner.getOwnerEmail().matches
+                ("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
+            throw new IllegalArgumentException(propertyOwner.getOwnerEmail() + "' is not a valid email address");
+        }
+        //phone check
+        if (propertyOwner.getOwnerPhoneNumber() == null || !propertyOwner.getOwnerPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {
+            throw new IllegalArgumentException("Invalid phone number: " + propertyOwner.getOwnerPhoneNumber());
+        }
         for (PropertyOwner owner : owners) {
-            //check for empty or null vat number given
-            if (propertyOwner.getOwnerVatNumber() == null || propertyOwner.getOwnerVatNumber().isEmpty()) {
-                throw new IllegalArgumentException("VAT number cannot be null or empty");
-            }
+
             //check for user with same vatNumber
             if (owner.getOwnerVatNumber().equals(propertyOwner.getOwnerVatNumber())) {
                 throw new IllegalArgumentException("A user with the VAT number '" + propertyOwner.getOwnerVatNumber() + "' already exists");
             }
+            //check for user with same email
+            if (owner.getOwnerEmail().equals(propertyOwner.getOwnerEmail())) {
+                throw new IllegalArgumentException("A user with the email address '" + propertyOwner.getOwnerEmail() + "' already exists");
+            }
+            //check for user with same phone
+            if (owner.getOwnerPhoneNumber().equals(propertyOwner.getOwnerPhoneNumber())) {
+                throw new IllegalArgumentException("A user with the phone number '" + propertyOwner.getOwnerPhoneNumber() + "' already exists");
+            }
+
         }
         owners.add(propertyOwner);
         return propertyOwner;
     }
+
 
     @Override
     public Optional<PropertyOwner> findUserByVatNumber(String vatNumber) {
@@ -79,9 +112,6 @@ public class UserServiceImpl implements UserService {
         }
         return Optional.empty();
     }
-
-
-
 
 
 }

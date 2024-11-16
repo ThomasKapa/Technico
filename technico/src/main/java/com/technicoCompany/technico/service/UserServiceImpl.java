@@ -21,8 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<PropertyOwner> findUserByVatNumber(String vatNumber) {
-        for (int i = 0; i < owners.size(); i++) {
-            PropertyOwner owner = owners.get(i);
+        for (PropertyOwner owner : owners) {
             if (owner.getOwnerVatNumber().equals(vatNumber)) {
                 return Optional.of(owner);
             }

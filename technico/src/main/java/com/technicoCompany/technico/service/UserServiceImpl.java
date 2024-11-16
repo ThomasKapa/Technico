@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.service;
 
+import com.technicoCompany.technico.exception.UserAlreadyExistsException;
 import com.technicoCompany.technico.model.PropertyOwner;
 import org.springframework.stereotype.Service;
 
@@ -46,15 +47,15 @@ public class UserServiceImpl implements UserService {
 
             //check for user with same vatNumber
             if (owner.getOwnerVatNumber().equals(propertyOwner.getOwnerVatNumber())) {
-                throw new IllegalArgumentException("A user with the VAT number '" + propertyOwner.getOwnerVatNumber() + "' already exists");
+                throw new UserAlreadyExistsException("A user with the VAT number '" + propertyOwner.getOwnerVatNumber() + "' already exists");
             }
             //check for user with same email
             if (owner.getOwnerEmail().equals(propertyOwner.getOwnerEmail())) {
-                throw new IllegalArgumentException("A user with the email address '" + propertyOwner.getOwnerEmail() + "' already exists");
+                throw new UserAlreadyExistsException("A user with the email address '" + propertyOwner.getOwnerEmail() + "' already exists");
             }
             //check for user with same phone
             if (owner.getOwnerPhoneNumber().equals(propertyOwner.getOwnerPhoneNumber())) {
-                throw new IllegalArgumentException("A user with the phone number '" + propertyOwner.getOwnerPhoneNumber() + "' already exists");
+                throw new UserAlreadyExistsException("A user with the phone number '" + propertyOwner.getOwnerPhoneNumber() + "' already exists");
             }
 
         }

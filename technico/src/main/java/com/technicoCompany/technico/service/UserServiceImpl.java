@@ -47,14 +47,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String vatNumber) {
+    public boolean deleteUser(String vatNumber) {
         for (Iterator<PropertyOwner> iterator = owners.iterator(); iterator.hasNext(); ) {
             PropertyOwner owner = iterator.next();
             if (owner.getOwnerVatNumber().equals(vatNumber)) {
                 iterator.remove();
-                break;
+                return true; // Deleted successfully
             }
         }
+        return false; // No match found
     }
 
 

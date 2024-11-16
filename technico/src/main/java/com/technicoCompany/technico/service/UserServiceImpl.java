@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.service;
 
+import com.technicoCompany.technico.exception.InvalidEmailException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
 import com.technicoCompany.technico.model.PropertyOwner;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
         //        No consecutive dots.
         if (propertyOwner.getOwnerEmail() == null || !propertyOwner.getOwnerEmail().matches
                 ("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
-            throw new IllegalArgumentException(propertyOwner.getOwnerEmail() + "' is not a valid email address");
+            throw new InvalidEmailException(propertyOwner.getOwnerEmail() + "' is not a valid email address");
         }
         //phone check
         if (propertyOwner.getOwnerPhoneNumber() == null || !propertyOwner.getOwnerPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {

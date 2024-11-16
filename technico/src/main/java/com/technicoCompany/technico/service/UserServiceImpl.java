@@ -31,18 +31,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PropertyOwner updateUser(PropertyOwner updatedOwner) {
+    public Optional<PropertyOwner> updateUser(PropertyOwner updatedOwner) {
         Optional<PropertyOwner> existingOwnerOptional = findUserByVatNumber(updatedOwner.getOwnerVatNumber());
         if (existingOwnerOptional.isPresent()) {
             PropertyOwner owner = existingOwnerOptional.get();
-            owner.setOwnerName(updatedOwner.getOwnerName());
-            owner.setOwnerLastName(updatedOwner.getOwnerLastName());
-            owner.setOwnerAddress(updatedOwner.getOwnerAddress());
-            owner.setOwnerPhoneNumber(updatedOwner.getOwnerPhoneNumber());
-            owner.setOwnerEmail(updatedOwner.getOwnerEmail());
-            return owner;
+            if (updatedOwner.getOwnerName() != null) owner.setOwnerName(updatedOwner.getOwnerName());
+            if (updatedOwner.getOwnerLastName() != null) owner.setOwnerLastName(updatedOwner.getOwnerLastName());
+            if (updatedOwner.getOwnerAddress() != null) owner.setOwnerAddress(updatedOwner.getOwnerAddress());
+            if (updatedOwner.getOwnerPhoneNumber() != null) owner.setOwnerPhoneNumber(updatedOwner.getOwnerPhoneNumber());
+            if (updatedOwner.getOwnerEmail() != null) owner.setOwnerEmail(updatedOwner.getOwnerEmail());
+            return Optional.of(owner);
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 

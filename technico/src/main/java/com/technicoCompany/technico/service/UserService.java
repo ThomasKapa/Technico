@@ -13,5 +13,5 @@ public interface UserService {
 
     boolean deleteUser(String vatNumber);
 
-
+    Optional<PropertyOwner> findUserByEmail(String ownerEmail);
 }

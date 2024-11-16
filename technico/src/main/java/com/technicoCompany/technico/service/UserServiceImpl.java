@@ -70,6 +70,16 @@ public class UserServiceImpl implements UserService {
         return false; // No match found
     }
 
+    @Override
+    public Optional<PropertyOwner> findUserByEmail(String ownerEmail) {
+        for (PropertyOwner owner : owners) {
+            if (owner.getOwnerEmail().equals(ownerEmail)) {
+                return Optional.of(owner);
+            }
+        }
+        return Optional.empty();
+    }
+
 
 
 

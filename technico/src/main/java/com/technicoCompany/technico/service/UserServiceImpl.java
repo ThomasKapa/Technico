@@ -1,6 +1,7 @@
 package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.InvalidEmailException;
+import com.technicoCompany.technico.exception.InvalidVatNumberException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
 import com.technicoCompany.technico.model.PropertyOwner;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,14 @@ public class UserServiceImpl implements UserService {
 
         //check for empty or null vat number given
         if (propertyOwner.getOwnerVatNumber() == null || propertyOwner.getOwnerVatNumber().isEmpty()) {
-            throw new IllegalArgumentException("VAT number cannot be null or empty");
+            throw new InvalidVatNumberException("VAT number cannot be null or empty");
         }
         //        Email checking
         //        The following restrictions are imposed in the email address’ local part by using this regex:
         //        It allows numeric values from 0 to 9.
         //        Both uppercase and lowercase letters from a to z are allowed.
         //        Allowed are underscore “_”, hyphen “-“, and dot “.”
-        //        Dot isn’t allowed at the start and end of the local part.
+        //        Dot isn’t allowed at the start and end of the local part.+
         //        Consecutive dots aren’t allowed.
         //        For the local part, a maximum of 64 characters are allowed.
         //
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
     public PropertyOwner updateUser(PropertyOwner updatedOwner) {
         // Find the existing owner by VAT number, or throw exception if not found
         PropertyOwner owner = findUserByVatNumber(updatedOwner.getOwnerVatNumber())
-                .orElseThrow(() -> new IllegalArgumentException("User with VAT number " + updatedOwner.getOwnerVatNumber() + " not found"));
+                .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + updatedOwner.getOwnerVatNumber() + " not found"));
 
         //update only the fields that the user has changed and not everything
         if (updatedOwner.getOwnerName() != null) owner.setOwnerName(updatedOwner.getOwnerName());

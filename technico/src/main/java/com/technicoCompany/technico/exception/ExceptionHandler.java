@@ -18,4 +18,8 @@ public class ExceptionHandler {
     public ResponseEntity<String> handlerInvalidEmailException(InvalidEmailException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<String> handlerInvalidVatNumber(InvalidVatNumberException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

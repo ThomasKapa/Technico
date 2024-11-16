@@ -22,4 +22,7 @@ public class ExceptionHandler {
     public ResponseEntity<String> handlerInvalidVatNumber(InvalidVatNumberException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+    public ResponseEntity<String> handlerInvalidPhoneNumberException(InvalidPhoneNumberException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

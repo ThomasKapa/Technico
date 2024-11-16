@@ -1,6 +1,7 @@
 package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.InvalidEmailException;
+import com.technicoCompany.technico.exception.InvalidPhoneNumberException;
 import com.technicoCompany.technico.exception.InvalidVatNumberException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
 import com.technicoCompany.technico.model.PropertyOwner;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
         }
         //phone check
         if (propertyOwner.getOwnerPhoneNumber() == null || !propertyOwner.getOwnerPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {
-            throw new IllegalArgumentException("Invalid phone number: " + propertyOwner.getOwnerPhoneNumber());
+            throw new InvalidPhoneNumberException("Invalid phone number: " + propertyOwner.getOwnerPhoneNumber());
         }
         for (PropertyOwner owner : owners) {
 

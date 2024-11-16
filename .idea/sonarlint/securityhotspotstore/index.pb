@@ -503,3 +503,5 @@ Q.idea/sonarlint/securityhotspotstore/6/1/61f671b178ce6ee8dd0c8b60093b2e9bc386aa
 Q.idea/sonarlint/securityhotspotstore/6/2/6284eecedd2d85fb3913164f96df4582210062ba,c\2\c2b17fcc88c767008f0010b78d75fc3ba497a1c4
 {
 Ktechnico/src/main/java/com/technicoCompany/technico/enums/PropertyType.java,1\d\1d3f445862258eb3ba6da9780f2470e61218de17
+D
+Technico Project.txt,a\a\aa2e59617b6a0cd18c8f13110a38d7ac9db13300

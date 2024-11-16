@@ -12,4 +12,6 @@ public interface UserService {
     PropertyOwner updateUser(PropertyOwner updatedOwner);
 
     void deleteUser(String vatNumber);
+
+
 }

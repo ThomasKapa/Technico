@@ -15,12 +15,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PropertyOwner createUser(PropertyOwner propertyOwner) {
+
+        for (PropertyOwner owner : owners) {
+            //check for empty or null vat number given
+            if (propertyOwner.getOwnerVatNumber() == null || propertyOwner.getOwnerVatNumber().isEmpty()) {
+                throw new IllegalArgumentException("VAT number cannot be null or empty");
+            }
+            //check for user with same vatNumber
+            if (owner.getOwnerVatNumber().equals(propertyOwner.getOwnerVatNumber())) {
+                throw new IllegalArgumentException("A user with the VAT number '" + propertyOwner.getOwnerVatNumber() + "' already exists");
+            }
+        }
         owners.add(propertyOwner);
         return propertyOwner;
     }
 
     @Override
     public Optional<PropertyOwner> findUserByVatNumber(String vatNumber) {
+
         for (PropertyOwner owner : owners) {
             if (owner.getOwnerVatNumber().equals(vatNumber)) {
                 return Optional.of(owner);
@@ -31,6 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<PropertyOwner> updateUser(PropertyOwner updatedOwner) {
+
         Optional<PropertyOwner> existingOwnerOptional = findUserByVatNumber(updatedOwner.getOwnerVatNumber());
         if (existingOwnerOptional.isPresent()) {
             PropertyOwner owner = existingOwnerOptional.get();
@@ -47,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(String vatNumber) {
+
         for (Iterator<PropertyOwner> iterator = owners.iterator(); iterator.hasNext(); ) {
             PropertyOwner owner = iterator.next();
             if (owner.getOwnerVatNumber().equals(vatNumber)) {

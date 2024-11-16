@@ -9,7 +9,7 @@ public interface UserService {
 
     Optional<PropertyOwner> findUserByVatNumber(String vatNumber);
 
-    Optional<PropertyOwner> updateUser(PropertyOwner updatedOwner);
+    PropertyOwner updateUser(PropertyOwner updatedOwner);
 
     boolean deleteUser(String vatNumber);
 

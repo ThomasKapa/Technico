@@ -42,20 +42,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<PropertyOwner> updateUser(PropertyOwner updatedOwner) {
+    public PropertyOwner updateUser(PropertyOwner updatedOwner) {
+        // Find the existing owner by VAT number, or throw exception if not found
+        PropertyOwner owner = findUserByVatNumber(updatedOwner.getOwnerVatNumber())
+                .orElseThrow(() -> new IllegalArgumentException("User with VAT number " + updatedOwner.getOwnerVatNumber() + " not found"));
 
-        Optional<PropertyOwner> existingOwnerOptional = findUserByVatNumber(updatedOwner.getOwnerVatNumber());
-        if (existingOwnerOptional.isPresent()) {
-            PropertyOwner owner = existingOwnerOptional.get();
-            if (updatedOwner.getOwnerName() != null) owner.setOwnerName(updatedOwner.getOwnerName());
-            if (updatedOwner.getOwnerLastName() != null) owner.setOwnerLastName(updatedOwner.getOwnerLastName());
-            if (updatedOwner.getOwnerAddress() != null) owner.setOwnerAddress(updatedOwner.getOwnerAddress());
-            if (updatedOwner.getOwnerPhoneNumber() != null) owner.setOwnerPhoneNumber(updatedOwner.getOwnerPhoneNumber());
-            if (updatedOwner.getOwnerEmail() != null) owner.setOwnerEmail(updatedOwner.getOwnerEmail());
-            return Optional.of(owner);
-        } else {
-            return Optional.empty();
-        }
+        //update only the fields that the user has changed and not everything
+        if (updatedOwner.getOwnerName() != null) owner.setOwnerName(updatedOwner.getOwnerName());
+        if (updatedOwner.getOwnerLastName() != null) owner.setOwnerLastName(updatedOwner.getOwnerLastName());
+        if (updatedOwner.getOwnerAddress() != null) owner.setOwnerAddress(updatedOwner.getOwnerAddress());
+        if (updatedOwner.getOwnerPhoneNumber() != null) owner.setOwnerPhoneNumber(updatedOwner.getOwnerPhoneNumber());
+        if (updatedOwner.getOwnerEmail() != null) owner.setOwnerEmail(updatedOwner.getOwnerEmail());
+
+        return owner;
     }
 
     @Override

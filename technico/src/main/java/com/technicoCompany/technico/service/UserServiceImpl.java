@@ -117,5 +117,10 @@ public class UserServiceImpl implements UserService {
         return Optional.empty();
     }
 
+    @Override
+    public List<PropertyOwner> findAllPropertyOwners() {
+        return owners;
+    }
+
 
 }

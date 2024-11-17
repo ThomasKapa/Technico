@@ -32,10 +32,17 @@ public class UserController {
         }
     }
 
+    //updated to return a message if user not found.
     @PutMapping("/{vatNumber}")
     public ResponseEntity<PropertyOwner> updateUser(@PathVariable String vatNumber, @RequestBody PropertyOwner propertyOwner) {
-        propertyOwner.setOwnerVatNumber(vatNumber);
-        return ResponseEntity.ok(userService.updateUser(propertyOwner));
+        boolean userExists = userService.findUserByVatNumber(vatNumber).isPresent();
+
+        if (userExists) {
+            propertyOwner.setOwnerVatNumber(vatNumber);
+            return ResponseEntity.ok(userService.updateUser(propertyOwner));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //updated to return a message if user not found.
@@ -49,11 +56,6 @@ public class UserController {
         // If not found
         return ResponseEntity.notFound().build();
     }
-
-
-
-
-
 
 
 }

@@ -38,11 +38,18 @@ public class UserController {
         return ResponseEntity.ok(userService.updateUser(propertyOwner));
     }
 
+    //updated to return a message if user not found.
     @DeleteMapping("/{vatNumber}")
     public ResponseEntity<Void> deleteUser(@PathVariable String vatNumber) {
-        userService.deleteUser(vatNumber);
-        return ResponseEntity.noContent().build();
+        boolean isDeleted = userService.deleteUser(vatNumber);
+        // If found and deleted
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        // If not found
+        return ResponseEntity.notFound().build();
     }
+
 
 
 

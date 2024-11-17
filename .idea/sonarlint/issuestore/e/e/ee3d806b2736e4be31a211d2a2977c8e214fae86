@@ -1,2 +1,8 @@
 
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªİ·ìüÿÿÿÿ
+n
+java:S11925"QDefine a constant instead of duplicating this literal "' already exists" 3 times.(—ÿâ8Ê¥ä«³2
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªİ·ìüÿÿÿÿ8Ì¥ä«³2
+i
+java:S5998*"LRefactor this repetition that can lead to a stack overflow for large inputs.(Øµ„8Ş¥ä«³2
+^
+java:S6353."<Use concise character class syntax '\\d' instead of '[0-9]'.(ªöèÉÿÿÿÿÿ8Â¯å«³2

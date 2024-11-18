@@ -1,2 +1,8 @@
 
+^
+java:S4973"<Strings and Boxed types should be compared using "equals()".(›Ï³‚üÿÿÿÿ8±Œúß³2
+^
+java:S4973R"<Strings and Boxed types should be compared using "equals()".(›Ï³‚üÿÿÿÿ8²Œúß³2
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªİ·ìüÿÿÿÿ
+Z
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ8»úß³2

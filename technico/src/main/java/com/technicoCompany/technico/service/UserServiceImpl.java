@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.service;
 
+import com.technicoCompany.technico.enums.UserRole;
 import com.technicoCompany.technico.exception.InvalidEmailException;
 import com.technicoCompany.technico.exception.InvalidPhoneNumberException;
 import com.technicoCompany.technico.exception.InvalidVatNumberException;
@@ -15,7 +16,10 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final List<PropertyOwner> owners = new ArrayList<>();
+    private final List<PropertyOwner> owners = List.of(new PropertyOwner(UserRole.PROPERTY_OWNER,"a123456789","Thomas","Thomas","Address 1","210-1234567","test.email@gmail.com",List.of()));
+
+
+
 
     @Override
     public PropertyOwner createUser(PropertyOwner propertyOwner) {

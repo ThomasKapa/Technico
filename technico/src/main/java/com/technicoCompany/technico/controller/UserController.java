@@ -14,6 +14,9 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+    //Αγνοήστε αυτή την έφτιαξα για έλεγχο
+    @GetMapping("check")
+     public ResponseEntity<String> testEndpoint() {    return ResponseEntity.ok("PropertyOwner endpoint is working!");}
     public UserController(UserService userService) {
         this.userService = userService;
     }

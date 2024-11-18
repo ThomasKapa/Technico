@@ -2,6 +2,7 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.model.PropertyOwner;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -11,5 +12,10 @@ public interface UserService {
 
     PropertyOwner updateUser(PropertyOwner updatedOwner);
 
-    void deleteUser(String vatNumber);
+    boolean deleteUser(String vatNumber);
+
+    Optional<PropertyOwner> findUserByEmail(String ownerEmail);
+
+    public List<PropertyOwner> findAllPropertyOwners();
+
 }

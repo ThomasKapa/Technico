@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @ToString
 public class Repair {
 
-    private Long RepairId;
+    private Long repairId;
     private LocalDateTime scheduledRepairDate;
     private RepairStatus repairStatus;
     private RepairType repairType;
@@ -27,6 +27,5 @@ public class Repair {
     private String repairAddress;
     private PropertyOwner propertyOwner;
     private String workToBeDone;
-
 
 }

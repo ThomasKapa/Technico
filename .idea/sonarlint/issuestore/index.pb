@@ -503,3 +503,17 @@ w
 Gtechnico/src/main/java/com/technicoCompany/technico/enums/UserRole.java,f\e\fea4214489c7eb8956f69833b838e2ec5a3cf656
 {
 Ktechnico/src/main/java/com/technicoCompany/technico/enums/PropertyType.java,1\d\1d3f445862258eb3ba6da9780f2470e61218de17
+D
+Technico Project.txt,a\a\aa2e59617b6a0cd18c8f13110a38d7ac9db13300
+|
+Ltechnico/src/main/java/com/technicoCompany/technico/service/AuthService.java,9\b\9b1f14b85400f860a77cca148fc7b0c9e7f07fcb
+å
+\technico/src/main/java/com/technicoCompany/technico/exception/ResourceNotFoundException.java,7\1\7130b7fcf7a3f450f8e3756bfed6c8b2e76adce1
+ç
+]technico/src/main/java/com/technicoCompany/technico/exception/UserAlreadyExistsException.java,c\a\cabba18bdf7da7f5aeec44f97779611bc5c1e8ae
+à
+Xtechnico/src/main/java/com/technicoCompany/technico/exception/InvalidEmailException.java,b\d\bde7bdd08e9185049de3faf3bc8cf6e0a382ed38
+å
+\technico/src/main/java/com/technicoCompany/technico/exception/InvalidVatNumberException.java,8\f\8f2cf2582c100a6246c8211e16335079c36cfd76
+é
+^technico/src/main/java/com/technicoCompany/technico/exception/InvalidPhoneNumberException.java,2\9\29d0fb9363f307ad6c3abc0d1814c76c52cd99d8

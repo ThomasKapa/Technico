@@ -1,4 +1,6 @@
 
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ζχό
-]
-java:S2094"BRemove this empty class, write its code or make it an "interface".(ΘΕΫϊÿÿÿÿ
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ζχό8†Π„ρ³2
+\
+java:S1118":Add a private constructor to hide the implicit public one.(ΘΕΫϊÿÿÿÿ8™Π„ρ³2
+G
+java:S1128"*Remove this unused import 'java.sql.Date'.(Ωΐ½Κ8ΈΠ„ρ³2

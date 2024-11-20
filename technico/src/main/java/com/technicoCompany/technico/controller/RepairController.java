@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.model.Repair;
 import com.technicoCompany.technico.service.RepairService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

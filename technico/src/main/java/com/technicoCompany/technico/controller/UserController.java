@@ -1,12 +1,10 @@
 package com.technicoCompany.technico.controller;
 
-import com.technicoCompany.technico.model.PropertyOwner;
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -22,13 +20,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<PropertyOwner> createUser(@RequestBody PropertyOwner propertyOwner) {
+    public ResponseEntity<Owner> createUser(@RequestBody Owner propertyOwner) {
         return ResponseEntity.ok(userService.createUser(propertyOwner));
     }
 
     @GetMapping("{vatNumber}")
-    public ResponseEntity<PropertyOwner> getUserByVat(@PathVariable String vatNumber) {
-        PropertyOwner propertyOwner = userService.findUserByVatNumber(vatNumber).orElse(null);
+    public ResponseEntity<Owner> getUserByVat(@PathVariable String vatNumber) {
+        Owner propertyOwner = userService.findUserByVatNumber(vatNumber).orElse(null);
         if (propertyOwner != null) {
             return ResponseEntity.ok(propertyOwner);
         } else {
@@ -38,7 +36,7 @@ public class UserController {
 
     //updated to return a message if user not found.
     @PutMapping("/{vatNumber}")
-    public ResponseEntity<PropertyOwner> updateUser(@PathVariable String vatNumber, @RequestBody PropertyOwner propertyOwner) {
+    public ResponseEntity<Owner> updateUser(@PathVariable String vatNumber, @RequestBody Owner propertyOwner) {
         boolean userExists = userService.findUserByVatNumber(vatNumber).isPresent();
 
         if (userExists) {

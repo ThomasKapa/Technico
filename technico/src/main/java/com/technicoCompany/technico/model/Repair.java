@@ -1,31 +1,45 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.enums.RepairStatus;
-import com.technicoCompany.technico.enums.RepairType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.stereotype.Component;
+import gr.technico.app.enumeration.RepairStatus;
+import gr.technico.app.enumeration.RepairType;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Component
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Repair {
+@ToString(callSuper = true)
+@Entity
+@Table(name = "repair")
+@SequenceGenerator(name = "idGenerator", sequenceName = "repair_seq", initialValue = 1, allocationSize = 1)
 
-    private Long repairId;
+public class Repair extends BaseModel{
+
+    @Column(nullable = false)
     private LocalDateTime scheduledRepairDate;
-    private RepairStatus repairStatus;
-    private RepairType repairType;
-    private BigDecimal repairCost;
-    private String repairAddress;
-    private PropertyOwner propertyOwner;
-    private String workToBeDone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RepairStatus repairStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RepairType repairType;
+
+    @Column(precision = 10, scale = 2, nullable = false)
+    private BigDecimal repairCost;
+
+    @Column(length = 100, nullable = false)
+    private String repairAddress;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Property property;
+
+    @Column(length = 500)
+    private String workToBeDone;
 }

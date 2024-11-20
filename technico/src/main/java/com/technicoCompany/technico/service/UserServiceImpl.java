@@ -1,24 +1,17 @@
 package com.technicoCompany.technico.service;
 
-import com.technicoCompany.technico.enums.UserRole;
 import com.technicoCompany.technico.exception.InvalidEmailException;
 import com.technicoCompany.technico.exception.InvalidPhoneNumberException;
 import com.technicoCompany.technico.exception.InvalidVatNumberException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
-import com.technicoCompany.technico.model.PropertyOwner;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final List<PropertyOwner> owners = List.of(new PropertyOwner(UserRole.PROPERTY_OWNER,"a123456789","Thomas","Thomas","Address 1","210-1234567","test.email@gmail.com",List.of()));
-
-
+    private final Set<PropertyOwner> owners = new HashSet<>();
 
 
     @Override
@@ -122,7 +115,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<PropertyOwner> findAllPropertyOwners() {
+    public Set<PropertyOwner> findAllPropertyOwners() {
         return owners;
     }
 

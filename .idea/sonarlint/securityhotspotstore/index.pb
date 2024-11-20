@@ -85,8 +85,6 @@ Ttechnico/src/main/java/com/technicoCompany/technico/service/PropertyServiceImpl
 Ltechnico/src/main/java/com/technicoCompany/technico/service/UserService.java,1\b\1bc4dffe4a9119a125685750fa7b70b13fc0d2e1
 Ä
 Ptechnico/src/main/java/com/technicoCompany/technico/service/UserServiceImpl.java,e\e\ee3d806b2736e4be31a211d2a2977c8e214fae86
-s
-Ctechnico/src/main/java/com/technicoCompany/technico/model/User.java,8\e\8e85d482f24fc3a04df59e06e57a66861602c1fe
 w
 Gtechnico/src/main/java/com/technicoCompany/technico/model/Property.java,2\8\28e87f1331fc5c627225bab041fb393dececd2bc
 ~
@@ -107,8 +105,6 @@ Rtechnico/src/main/java/com/technicoCompany/technico/repository/UserRepository.j
 Stechnico/src/main/java/com/technicoCompany/technico/exception/ExceptionHandler.java,2\f\2fc89a926c5354aedaed85b2c56b5f9b5c277968
 |
 Ltechnico/src/main/java/com/technicoCompany/technico/model/PropertyOwner.java,b\d\bd78cd52b04ed38edb76edb19e0da08a53280079
-t
-Dtechnico/src/main/java/com/technicoCompany/technico/model/Admin.java,7\2\7274b307c7560cd1fff943af21372fbf930c46fa
 Ü
 Vtechnico/src/main/java/com/technicoCompany/technico/repository/PropertyRepository.java,1\f\1fc09e3e7648f9b34d2940ebb8a30525608c4cf4
 Ñ
@@ -192,8 +188,6 @@ G.idea/sonarlint/issuestore/0/1/0181a89c5d944c7b1aff7fae3bcfdbc4d0532342,9\c\9c
 Å
 Q.idea/sonarlint/securityhotspotstore/d/4/d450f86149b2213762ff79d417e812e8dbbe2d44,2\7\276495b53d03dde94a77bb4422e2fb6007452fe0
 Å
-Q.idea/sonarlint/securityhotspotstore/7/2/7274b307c7560cd1fff943af21372fbf930c46fa,e\7\e723cf502c7807a4f597ca68cb349727ca5b6d17
-Å
 Q.idea/sonarlint/securityhotspotstore/7/5/75293cd1f196358e9f04d1c9e13b2be01e39dae6,0\9\0921c10d9f21a5d3ecaecd8f22c7764aeba05434
 Å
 Q.idea/sonarlint/securityhotspotstore/7/8/78b158d79d4a615b8bf614d6ee88675e25eba276,4\a\4a8ae5b1f734457957c1be71eaa69ef1249e3bf3
@@ -217,8 +211,6 @@ w
 G.idea/sonarlint/issuestore/1/e/1e90ede3db0b0e4d8acb6669b7d9b3660cd9d125,d\7\d749b9b76920873b36ff2cf4c3dc74b0f4c711fa
 w
 G.idea/sonarlint/issuestore/1/e/1ea382bf5f01f3539057bd473520d69180db30ea,3\2\32c079c1f3e881833ccfb2fe420d85bb09ad04db
-Å
-Q.idea/sonarlint/securityhotspotstore/8/e/8e85d482f24fc3a04df59e06e57a66861602c1fe,c\e\ce2aeaed20e69f5aede27dd951bbdbeca360d53c
 Å
 Q.idea/sonarlint/securityhotspotstore/d/3/d30c7992b59df387d3cdc344e9b62f28edd52b6e,5\9\598cf2b4c53c9998c53ee9392b12df6ade893b97
 Å
@@ -517,3 +509,7 @@ Xtechnico/src/main/java/com/technicoCompany/technico/exception/InvalidEmailExcep
 \technico/src/main/java/com/technicoCompany/technico/exception/InvalidVatNumberException.java,8\f\8f2cf2582c100a6246c8211e16335079c36cfd76
 é
 ^technico/src/main/java/com/technicoCompany/technico/exception/InvalidPhoneNumberException.java,2\9\29d0fb9363f307ad6c3abc0d1814c76c52cd99d8
+x
+Htechnico/src/main/java/com/technicoCompany/technico/model/BaseModel.java,9\7\97db2715b20699d3e328e045f414c289b3020918
+|
+Ltechnico/src/main/java/com/technicoCompany/technico/service/BaseServise.java,4\6\461e0e4e87ca2e6a26d6b7c7a958cd7bcbfc5ea4

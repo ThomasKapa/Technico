@@ -1,21 +1,21 @@
 package com.technicoCompany.technico.service;
 
-import com.technicoCompany.technico.model.PropertyOwner;
+import com.technicoCompany.technico.model.Owner;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserService {
-    PropertyOwner createUser(PropertyOwner propertyOwner);
+    Owner createUser(Owner propertyOwner);
 
-    Optional<PropertyOwner> findUserByVatNumber(String vatNumber);
+    Optional<Owner> findUserByVatNumber(String vatNumber);
 
-    PropertyOwner updateUser(PropertyOwner updatedOwner);
+    Owner updateUser(Owner updatedOwner);
 
     boolean deleteUser(String vatNumber);
 
-    Optional<PropertyOwner> findUserByEmail(String ownerEmail);
+    Optional<Owner> findUserByEmail(String ownerEmail);
 
-    public List<PropertyOwner> findAllPropertyOwners();
+    public Set<Owner> findAllPropertyOwners();
 
 }

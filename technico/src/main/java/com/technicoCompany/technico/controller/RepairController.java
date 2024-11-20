@@ -40,7 +40,7 @@ public class RepairController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Repair> updateRepair(@PathVariable Long id, @RequestBody Repair repair) {
-        repair.setRepairId(id);
+        repair.setId(id);
         return ResponseEntity.ok(repairService.updateRepair(repair));
     }
 

@@ -40,7 +40,7 @@ public class UserController {
         boolean userExists = userService.findUserByVatNumber(vatNumber).isPresent();
 
         if (userExists) {
-            propertyOwner.setOwnerVatNumber(vatNumber);
+            propertyOwner.setVatNumber(vatNumber);
             return ResponseEntity.ok(userService.updateUser(propertyOwner));
         } else {
             return ResponseEntity.notFound().build();

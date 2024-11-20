@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.service.PropertyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class PropertyController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Property> updateProperty(@PathVariable Long id, @RequestBody Property property) {
-        property.setPropertyId(id);
+        property.setId(id);
         return ResponseEntity.ok(propertyService.updateProperty(property));
     }
 

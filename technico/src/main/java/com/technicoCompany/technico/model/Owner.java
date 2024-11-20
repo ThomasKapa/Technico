@@ -1,8 +1,9 @@
 package com.technicoCompany.technico.model;
 
-import gr.technico.app.enumeration.UserRole;
+import com.technicoCompany.technico.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -53,4 +54,5 @@ public class Owner extends BaseModel {
     @OneToMany(mappedBy = "owner",
             fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Property> properties;
+
 }

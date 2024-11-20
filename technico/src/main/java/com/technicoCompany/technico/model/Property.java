@@ -1,24 +1,37 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.enums.PropertyType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.springframework.stereotype.Component;
+import gr.technico.app.enumeration.PropertyType;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Component
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(callSuper = true)
+@Entity
+@Table(name = "property",
+        indexes = {
+                @Index(columnList = "propertyIdentificationE9Number"),
+                @Index(columnList = "vatNumber")
+        })
+@SequenceGenerator(name = "idGenerator", sequenceName = "property_seq", initialValue = 1, allocationSize = 1)
+public class Property extends BaseModel {
 
-public class Property {
-
-    private Long propertyId;
+    @Column(nullable = false, unique = true)
     private String propertyIdentificationE9Number;
+
+    @Column(length = 100, nullable = false)
     private String propertyAddress;
+
+    @Column(length = 4, nullable = false)
     private String yearOfConstruction;
+
+    @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
-    private PropertyOwner propertyOwner;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "vatNumber", nullable = false)
+    private Owner propertyOwner;
 }

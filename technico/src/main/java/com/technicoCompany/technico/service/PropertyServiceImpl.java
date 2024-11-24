@@ -1,5 +1,8 @@
 package com.technicoCompany.technico.service;
 
+import com.technicoCompany.technico.exception.InvalidIdException;
+import com.technicoCompany.technico.exception.InvalidVatNumberException;
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +24,8 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Optional<Property> findPropertyById(Long propertyId) {
-        for (int i = 0; i < properties.size(); i++) {
-            Property property = properties.get(i);
-            if (property.getPropertyId().equals(propertyId)) {
+        for (Property property : properties) {
+            if (property.getId().equals(propertyId)) {
                 return Optional.of(property);
             }
         }
@@ -33,9 +35,8 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> findPropertiesByOwnerVat(String vatNumber) {
         List<Property> list = new ArrayList<>();
-        for (int i = 0; i < properties.size(); i++) {
-            Property property = properties.get(i);
-            if (property.getPropertyOwner().getOwnerVatNumber().equals(vatNumber)) {
+        for (Property property : properties) {
+            if (property.getPropertyOwner().getVatNumber().equals(vatNumber)) {
                 list.add(property);
             }
         }
@@ -44,36 +45,34 @@ public class PropertyServiceImpl implements PropertyService {
 
     @Override
     public Property updateProperty(Property updatedProperty) {
-        Property existingProperty = findPropertyById(updatedProperty.getPropertyId()).orElse(null);
-        if (existingProperty != null) {
-            existingProperty.setPropertyAddress(updatedProperty.getPropertyAddress());
-            existingProperty.setYearOfConstruction(updatedProperty.getYearOfConstruction());
-            existingProperty.setPropertyType(updatedProperty.getPropertyType());
-        }
-        return existingProperty;
+        Property property = findPropertyById(updatedProperty.getId())
+                .orElseThrow(() -> new InvalidIdException("Property with Id " + updatedProperty.getId() + " not found"));
+        if (updatedProperty.getPropertyIdentificationE9Number() != null)
+            property.setPropertyIdentificationE9Number(updatedProperty.getPropertyIdentificationE9Number());
+
+        if (updatedProperty.getPropertyAddress() != null)
+            property.setPropertyAddress(updatedProperty.getPropertyAddress());
+
+        if (updatedProperty.getYearOfConstruction() != null)
+            property.setYearOfConstruction(updatedProperty.getYearOfConstruction());
+
+        if (updatedProperty.getPropertyType() != null)
+            property.setPropertyType(updatedProperty.getPropertyType());
+
+        return property;
     }
 
     @Override
-    public void deleteProperty(Long propertyId) {
+    public boolean deleteProperty(Long propertyId) {
         for (Iterator<Property> iterator = properties.iterator(); iterator.hasNext(); ) {
             Property property = iterator.next();
-            if (property.getPropertyId().equals(propertyId)) {
+            if (property.getId().equals(propertyId)) {
                 iterator.remove();
-                break;
+                return true; // Deleted successfully
             }
         }
+        return false; // No match found
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

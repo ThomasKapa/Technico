@@ -14,5 +14,5 @@ public interface PropertyService {
 
     Property updateProperty(Property updatedProperty);
 
-    void deleteProperty(Long propertyId);
+    boolean deleteProperty(Long propertyId);
 }

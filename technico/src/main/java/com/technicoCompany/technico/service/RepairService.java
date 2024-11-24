@@ -16,5 +16,5 @@ public interface RepairService {
 
     Repair updateRepair(Repair updatedRepair);
 
-    void deleteRepair(Long repairId);
+    boolean deleteRepair(Long repairId);
 }

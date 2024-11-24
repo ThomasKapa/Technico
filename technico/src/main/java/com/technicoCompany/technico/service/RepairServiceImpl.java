@@ -23,9 +23,8 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public Optional<Repair> findRepairById(Long repairId) {
-        for (int i = 0; i < repairs.size(); i++) {
-            Repair repair = repairs.get(i);
-            if (repair.getRepairId() == repairId) {
+        for (Repair repair : repairs){
+            if (repair.getId() == repairId) {
                 return Optional.of(repair);
             }
         }
@@ -35,9 +34,8 @@ public class RepairServiceImpl implements RepairService {
     @Override
     public List<Repair> findRepairsByOwnerVat(String vatNumber) {
         List<Repair> list = new ArrayList<>();
-        for (int i = 0; i < repairs.size(); i++) {
-            Repair repair = repairs.get(i);
-            if (repair.getPropertyOwner().getOwnerVatNumber().equals(vatNumber)) {
+        for (Repair repair : repairs){
+            if (repair.getProperty().getPropertyOwner().getVatNumber().equals(vatNumber)) {
                 list.add(repair);
             }
         }
@@ -49,8 +47,7 @@ public class RepairServiceImpl implements RepairService {
         LocalDateTime start = LocalDateTime.parse(startDate);
         LocalDateTime end = LocalDateTime.parse(endDate);
         List<Repair> list = new ArrayList<>();
-        for (int i = 0; i < repairs.size(); i++) {
-            Repair repair = repairs.get(i);
+        for (Repair repair : repairs){
             if (repair.getScheduledRepairDate().isAfter(start) && repair.getScheduledRepairDate().isBefore(end)) {
                 list.add(repair);
             }
@@ -60,9 +57,9 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public Repair updateRepair(Repair updatedRepair) {
-        Optional<Repair> existingRepairOptional = findRepairById(updatedRepair.getRepairId());
+        Optional<Repair> existingRepairOptional = findRepairById(updatedRepair.getId());
         if (existingRepairOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Repair not found with ID: " + updatedRepair.getRepairId());
+            throw new ResourceNotFoundException("Repair not found with ID: " + updatedRepair.getId());
         }
         Repair existingRepair = existingRepairOptional.get();
         existingRepair.setRepairStatus(updatedRepair.getRepairStatus());
@@ -75,14 +72,15 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public void deleteRepair(Long repairId) {
+    public boolean deleteRepair(Long repairId) {
         for (Iterator<Repair> iterator = repairs.iterator(); iterator.hasNext(); ) {
             Repair repair = iterator.next();
-            if (repair.getRepairId() ==  repairId) {
+            if (repair.getId() ==  repairId) {
                 iterator.remove();
-                break;
+                return true; // Deleted successfully
             }
         }
+        return false; // No match found
     }
 
 

@@ -1,7 +1,7 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.enums.RepairStatus;
-import com.technicoCompany.technico.enums.RepairType;
+import com.technicoCompany.technico.enumeration.RepairStatus;
+import com.technicoCompany.technico.enumeration.RepairType;
 import jakarta.persistence.*;
 import lombok.*;
 

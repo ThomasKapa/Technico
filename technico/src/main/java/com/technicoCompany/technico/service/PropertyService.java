@@ -5,7 +5,7 @@ import com.technicoCompany.technico.model.Property;
 import java.util.List;
 import java.util.Optional;
 
-public interface PropertyService {
+public interface PropertyService extends BaseServise<Property, Long>{
     Property createProperty(Property property);
 
     Optional<Property> findPropertyById(Long propertyId);

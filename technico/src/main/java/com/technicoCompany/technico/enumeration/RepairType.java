@@ -1,4 +1,4 @@
-package com.technicoCompany.technico.enums;
+package com.technicoCompany.technico.enumeration;
 
 public enum RepairType {
     PAINTING,

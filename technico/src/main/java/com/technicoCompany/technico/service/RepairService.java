@@ -5,7 +5,7 @@ import com.technicoCompany.technico.model.Repair;
 import java.util.List;
 import java.util.Optional;
 
-public interface RepairService {
+public interface RepairService extends BaseServise<Repair, Long> {
     Repair createRepair(Repair repair);
 
     Optional<Repair> findRepairById(Long repairId);

@@ -1,6 +1,6 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.enums.PropertyType;
+import com.technicoCompany.technico.enumeration.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 

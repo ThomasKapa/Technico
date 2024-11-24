@@ -1,8 +1,7 @@
 package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.InvalidIdException;
-import com.technicoCompany.technico.exception.InvalidVatNumberException;
-import com.technicoCompany.technico.model.Owner;
+
 import com.technicoCompany.technico.model.Property;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PropertyServiceImpl implements PropertyService {
+public class PropertyServiceImpl extends BaseServiceImpl<Property> implements PropertyService {
 
     private final List<Property> properties = new ArrayList<>();
 

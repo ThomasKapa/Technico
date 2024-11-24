@@ -1,9 +1,8 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.enums.UserRole;
+import com.technicoCompany.technico.enumeration.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 

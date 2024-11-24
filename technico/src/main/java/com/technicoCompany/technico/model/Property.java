@@ -33,6 +33,6 @@ public class Property extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vatNumber", nullable = false)
-    private Owner propertyOwner;
+    private Owner owner;
 
 }

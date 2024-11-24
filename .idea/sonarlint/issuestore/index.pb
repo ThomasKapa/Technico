@@ -143,8 +143,6 @@ w
 Gtechnico/src/main/java/com/technicoCompany/technico/model/Property.java,2\8\28e87f1331fc5c627225bab041fb393dececd2bc
 †
 Vtechnico/src/main/java/com/technicoCompany/technico/controller/PropertyController.java,1\c\1ca05d2bae5d90d446037658e9b39f0766f9497b
-|
-Ltechnico/src/main/java/com/technicoCompany/technico/model/PropertyOwner.java,b\d\bd78cd52b04ed38edb76edb19e0da08a53280079
 †
 Vtechnico/src/main/java/com/technicoCompany/technico/repository/PropertyRepository.java,1\f\1fc09e3e7648f9b34d2940ebb8a30525608c4cf4
 €

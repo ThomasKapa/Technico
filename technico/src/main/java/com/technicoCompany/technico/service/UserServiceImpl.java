@@ -4,6 +4,8 @@ import com.technicoCompany.technico.exception.InvalidEmailException;
 import com.technicoCompany.technico.exception.InvalidPhoneNumberException;
 import com.technicoCompany.technico.exception.InvalidVatNumberException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
+import com.technicoCompany.technico.model.Owner;
+import com.technicoCompany.technico.repository.OwnerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,14 +13,14 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final Set<PropertyOwner> owners = new HashSet<>();
+    private final Set<Owner> owners = new HashSet<>();
 
 
     @Override
-    public PropertyOwner createUser(PropertyOwner propertyOwner) {
+    public Owner createUser(Owner propertyOwner) {
 
         //check for empty or null vat number given
-        if (propertyOwner.getOwnerVatNumber() == null || propertyOwner.getOwnerVatNumber().isEmpty()) {
+        if (propertyOwner.getVatNumber() == null || propertyOwner.getVatNumber().isEmpty()) {
             throw new InvalidVatNumberException("VAT number cannot be null or empty");
         }
         //        Email checking
@@ -35,27 +37,27 @@ public class UserServiceImpl implements UserService {
         //        We allow both uppercase and lowercase letters from a to z.
         //        Hyphen “-” and dot “.” aren’t allowed at the start and end of the domain part.
         //        No consecutive dots.
-        if (propertyOwner.getOwnerEmail() == null || !propertyOwner.getOwnerEmail().matches
+        if (propertyOwner.getEmail() == null || !propertyOwner.getEmail().matches
                 ("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
-            throw new InvalidEmailException(propertyOwner.getOwnerEmail() + "' is not a valid email address");
+            throw new InvalidEmailException(propertyOwner.getEmail() + "' is not a valid email address");
         }
         //phone check
-        if (propertyOwner.getOwnerPhoneNumber() == null || !propertyOwner.getOwnerPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {
-            throw new InvalidPhoneNumberException("Invalid phone number: " + propertyOwner.getOwnerPhoneNumber());
+        if (propertyOwner.getPhoneNumber() == null || !propertyOwner.getPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {
+            throw new InvalidPhoneNumberException("Invalid phone number: " + propertyOwner.getPhoneNumber());
         }
-        for (PropertyOwner owner : owners) {
+        for (Owner owner : owners) {
 
             //check for user with same vatNumber
-            if (owner.getOwnerVatNumber().equals(propertyOwner.getOwnerVatNumber())) {
-                throw new UserAlreadyExistsException("A user with the VAT number '" + propertyOwner.getOwnerVatNumber() + "' already exists");
+            if (owner.getVatNumber().equals(propertyOwner.getVatNumber())) {
+                throw new UserAlreadyExistsException("A user with the VAT number '" + propertyOwner.getVatNumber() + "' already exists");
             }
             //check for user with same email
-            if (owner.getOwnerEmail().equals(propertyOwner.getOwnerEmail())) {
-                throw new UserAlreadyExistsException("A user with the email address '" + propertyOwner.getOwnerEmail() + "' already exists");
+            if (owner.getEmail().equals(propertyOwner.getEmail())) {
+                throw new UserAlreadyExistsException("A user with the email address '" + propertyOwner.getEmail() + "' already exists");
             }
             //check for user with same phone
-            if (owner.getOwnerPhoneNumber().equals(propertyOwner.getOwnerPhoneNumber())) {
-                throw new UserAlreadyExistsException("A user with the phone number '" + propertyOwner.getOwnerPhoneNumber() + "' already exists");
+            if (owner.getPhoneNumber().equals(propertyOwner.getPhoneNumber())) {
+                throw new UserAlreadyExistsException("A user with the phone number '" + propertyOwner.getPhoneNumber() + "' already exists");
             }
 
         }
@@ -65,10 +67,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Optional<PropertyOwner> findUserByVatNumber(String vatNumber) {
+    public Optional<Owner> findUserByVatNumber(String vatNumber) {
 
-        for (PropertyOwner owner : owners) {
-            if (owner.getOwnerVatNumber().equals(vatNumber)) {
+        for (Owner owner : owners) {
+            if (owner.getVatNumber().equals(vatNumber)) {
                 return Optional.of(owner);
             }
         }
@@ -76,27 +78,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PropertyOwner updateUser(PropertyOwner updatedOwner) {
+    public Owner updateUser(Owner updatedOwner) {
         // Find the existing owner by VAT number, or throw exception if not found
-        PropertyOwner owner = findUserByVatNumber(updatedOwner.getOwnerVatNumber())
-                .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + updatedOwner.getOwnerVatNumber() + " not found"));
+        Owner owner = findUserByVatNumber(updatedOwner.getVatNumber())
+                .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + updatedOwner.getVatNumber() + " not found"));
 
         //update only the fields that the user has changed and not everything
-        if (updatedOwner.getOwnerName() != null) owner.setOwnerName(updatedOwner.getOwnerName());
-        if (updatedOwner.getOwnerLastName() != null) owner.setOwnerLastName(updatedOwner.getOwnerLastName());
-        if (updatedOwner.getOwnerAddress() != null) owner.setOwnerAddress(updatedOwner.getOwnerAddress());
-        if (updatedOwner.getOwnerPhoneNumber() != null) owner.setOwnerPhoneNumber(updatedOwner.getOwnerPhoneNumber());
-        if (updatedOwner.getOwnerEmail() != null) owner.setOwnerEmail(updatedOwner.getOwnerEmail());
+        if (updatedOwner.getFirstName() != null) owner.setFirstName(updatedOwner.getFirstName());
+        if (updatedOwner.getLastName() != null) owner.setLastName(updatedOwner.getLastName());
+        if (updatedOwner.getAddress() != null) owner.setAddress(updatedOwner.getAddress());
+        if (updatedOwner.getPhoneNumber() != null) owner.setPhoneNumber(updatedOwner.getPhoneNumber());
+        if (updatedOwner.getEmail() != null) owner.setEmail(updatedOwner.getEmail());
 
         return owner;
     }
 
     @Override
-    public boolean deleteUser(String vatNumber) {
+    public boolean deleteOwner(String vatNumber) {
 
-        for (Iterator<PropertyOwner> iterator = owners.iterator(); iterator.hasNext(); ) {
-            PropertyOwner owner = iterator.next();
-            if (owner.getOwnerVatNumber().equals(vatNumber)) {
+        for (Iterator<Owner> iterator = owners.iterator(); iterator.hasNext(); ) {
+            Owner owner = iterator.next();
+            if (owner.getVatNumber().equals(vatNumber)) {
                 iterator.remove();
                 return true; // Deleted successfully
             }
@@ -105,9 +107,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<PropertyOwner> findUserByEmail(String ownerEmail) {
-        for (PropertyOwner owner : owners) {
-            if (owner.getOwnerEmail().equals(ownerEmail)) {
+    public Optional<Owner> findUserByEmail(String ownerEmail) {
+        for (Owner owner : owners) {
+            if (owner.getEmail().equals(ownerEmail)) {
                 return Optional.of(owner);
             }
         }
@@ -115,7 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<PropertyOwner> findAllPropertyOwners() {
+    public Set<Owner> findAllPropertyOwners() {
         return owners;
     }
 

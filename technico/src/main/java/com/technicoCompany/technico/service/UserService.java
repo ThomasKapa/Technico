@@ -12,7 +12,7 @@ public interface UserService {
 
     Owner updateUser(Owner updatedOwner);
 
-    boolean deleteUser(String vatNumber);
+    boolean deleteOwner(String vatNumber);
 
     Optional<Owner> findUserByEmail(String ownerEmail);
 

@@ -103,8 +103,6 @@ Rtechnico/src/main/java/com/technicoCompany/technico/controller/UserController.j
 Rtechnico/src/main/java/com/technicoCompany/technico/repository/UserRepository.java,c\6\c6a404bbbd8041ee54310e4c25517a59e465ed0d
 ƒ
 Stechnico/src/main/java/com/technicoCompany/technico/exception/ExceptionHandler.java,2\f\2fc89a926c5354aedaed85b2c56b5f9b5c277968
-|
-Ltechnico/src/main/java/com/technicoCompany/technico/model/PropertyOwner.java,b\d\bd78cd52b04ed38edb76edb19e0da08a53280079
 †
 Vtechnico/src/main/java/com/technicoCompany/technico/repository/PropertyRepository.java,1\f\1fc09e3e7648f9b34d2940ebb8a30525608c4cf4
 „

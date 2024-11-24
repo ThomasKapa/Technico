@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface PropertyRepository extends JpaRepository<Property, Long> {
+public interface PropertyRepository extends BaseRepository<Property, Long> {
 
     // βγαζει property με βαση το αφμ
     List<Property> findByOwnerVatNumber(String vatNumber);

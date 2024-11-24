@@ -2,92 +2,75 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.ResourceNotFoundException;
 import com.technicoCompany.technico.model.Repair;
+import com.technicoCompany.technico.repository.BaseRepository;
+import com.technicoCompany.technico.repository.RepairRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RepairServiceImpl implements RepairService {
+@RequiredArgsConstructor
+public class RepairServiceImpl extends BaseServiceImpl<Repair> implements RepairService {
 
-    private final List<Repair> repairs = new ArrayList<>();
+    private final RepairRepository repairRepository;
 
     @Override
+    protected BaseRepository<Repair, Long> getRepository() {
+        return repairRepository;
+    }
+    @Override
     public Repair createRepair(Repair repair) {
-        repairs.add(repair);
+        repairRepository.create(repair);
         return repair;
     }
 
     @Override
     public Optional<Repair> findRepairById(Long repairId) {
-        for (Repair repair : repairs){
-            if (repair.getId() == repairId) {
-                return Optional.of(repair);
-            }
-        }
-        return Optional.empty();
+        return repairRepository.findById(repairId);
     }
 
     @Override
     public List<Repair> findRepairsByOwnerVat(String vatNumber) {
-        List<Repair> list = new ArrayList<>();
-        for (Repair repair : repairs){
-            if (repair.getProperty().getPropertyOwner().getVatNumber().equals(vatNumber)) {
-                list.add(repair);
-            }
-        }
-        return list;
+        return repairRepository.findByOwnerVatNumber(vatNumber);
     }
 
     @Override
     public List<Repair> findRepairsByDateRange(String startDate, String endDate) {
         LocalDateTime start = LocalDateTime.parse(startDate);
         LocalDateTime end = LocalDateTime.parse(endDate);
-        List<Repair> list = new ArrayList<>();
-        for (Repair repair : repairs){
-            if (repair.getScheduledRepairDate().isAfter(start) && repair.getScheduledRepairDate().isBefore(end)) {
-                list.add(repair);
-            }
-        }
-        return list;
+        return repairRepository.findByScheduledRepairDateBetween(start, end);
     }
+
 
     @Override
     public Repair updateRepair(Repair updatedRepair) {
-        Optional<Repair> existingRepairOptional = findRepairById(updatedRepair.getId());
-        if (existingRepairOptional.isEmpty()) {
-            throw new ResourceNotFoundException("Repair not found with ID: " + updatedRepair.getId());
-        }
-        Repair existingRepair = existingRepairOptional.get();
-        existingRepair.setRepairStatus(updatedRepair.getRepairStatus());
-        existingRepair.setRepairType(updatedRepair.getRepairType());
-        existingRepair.setRepairCost(updatedRepair.getRepairCost());
-        existingRepair.setRepairAddress(updatedRepair.getRepairAddress());
-        existingRepair.setWorkToBeDone(updatedRepair.getWorkToBeDone());
+        Repair repair = repairRepository.findById(updatedRepair.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Repair not found with ID: " + updatedRepair.getId()));
 
-        return existingRepair;
+        // Update only non-null fields
+        if (updatedRepair.getRepairStatus() != null) repair.setRepairStatus(updatedRepair.getRepairStatus());
+        if (updatedRepair.getRepairType() != null) repair.setRepairType(updatedRepair.getRepairType());
+        if (updatedRepair.getRepairCost() != null) repair.setRepairCost(updatedRepair.getRepairCost());
+        if (updatedRepair.getRepairAddress() != null) repair.setRepairAddress(updatedRepair.getRepairAddress());
+        if (updatedRepair.getWorkToBeDone() != null) repair.setWorkToBeDone(updatedRepair.getWorkToBeDone());
+
+        repairRepository.create(repair);
+        return repair;
     }
+
 
     @Override
     public boolean deleteRepair(Long repairId) {
-        for (Iterator<Repair> iterator = repairs.iterator(); iterator.hasNext(); ) {
-            Repair repair = iterator.next();
-            if (repair.getId() ==  repairId) {
-                iterator.remove();
-                return true; // Deleted successfully
-            }
+        Optional<Repair> repair = repairRepository.findById(repairId);
+        if (repair.isPresent()) {
+            repairRepository.delete(repair.get());
+            return true;
         }
-        return false; // No match found
+        return false;
     }
-
-
-
-
-
-
 
 
 }

@@ -5,7 +5,8 @@ import com.technicoCompany.technico.model.Owner;
 import java.util.Optional;
 import java.util.Set;
 
-public interface UserService {
+public interface OwnerService extends BaseServise<Owner, Long>{
+
     Owner createUser(Owner propertyOwner);
 
     Optional<Owner> findUserByVatNumber(String vatNumber);

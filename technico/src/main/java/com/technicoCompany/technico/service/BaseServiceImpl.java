@@ -43,6 +43,8 @@ public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent
         getRepository().deleteById(id);
     }
 
+    public void findById(final Long id) {getRepository().findById(id);}
+
     @Override
     public T get(final Long id) {
         if (getRepository().get(id) == null) {
@@ -65,4 +67,7 @@ public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent
     public Long count() {
         return getRepository().count();
     }
+
+
+
 }

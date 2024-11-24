@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface RepairRepository extends JpaRepository<Repair, Long> {
+public interface RepairRepository extends BaseRepository<Repair, Long> {
     // βγαζει τα repairs με βαση το αφμ
-    List<Repair> findByPropertyOwner_OwnerVatNumber(String vatNumber);
+    List<Repair> findByOwnerVatNumber(String vatNumber);
 
     // βγαζει τα repairs με βαση το ευρος των ημερομηνιων
     List<Repair> findByScheduledRepairDateBetween(LocalDateTime startDate, LocalDateTime endDate);

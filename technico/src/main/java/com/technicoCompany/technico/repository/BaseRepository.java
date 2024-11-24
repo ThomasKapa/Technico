@@ -1,8 +1,10 @@
 package com.technicoCompany.technico.repository;
 
 import com.technicoCompany.technico.model.BaseModel;
+import com.technicoCompany.technico.model.Property;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BaseRepository<T extends BaseModel, K> {
 	T create(T item);
@@ -24,4 +26,6 @@ public interface BaseRepository<T extends BaseModel, K> {
 	List<T> findAll();
 
 	Long count();
+
+	Optional<T> findById(K id);
 }

@@ -11,4 +11,11 @@ public interface OwnerRepository extends JpaRepository<Owner, String> {
     // βγαζει τον owner με βαση το email
     Optional<Owner> findByOwnerEmail(String ownerEmail);
 
+    boolean existsByVatNumber(String vatNumber);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByPhoneNumber(String phoneNumber);
+
+    Optional<Owner> findByVatNumber(String vatNumber);
 }

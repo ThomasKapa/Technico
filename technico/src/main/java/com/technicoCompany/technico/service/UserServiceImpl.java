@@ -6,6 +6,7 @@ import com.technicoCompany.technico.exception.InvalidVatNumberException;
 import com.technicoCompany.technico.exception.UserAlreadyExistsException;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.repository.OwnerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,7 +14,12 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final Set<Owner> owners = new HashSet<>();
+    private final OwnerRepository ownerRepository;
+
+    @Autowired
+    public UserServiceImpl(OwnerRepository ownerRepository) {
+        this.ownerRepository = ownerRepository;
+    }
 
 
     @Override
@@ -45,42 +51,38 @@ public class UserServiceImpl implements UserService {
         if (propertyOwner.getPhoneNumber() == null || !propertyOwner.getPhoneNumber().matches("\\+?[0-9\\-\\(\\)\\s]*[0-9]+")) {
             throw new InvalidPhoneNumberException("Invalid phone number: " + propertyOwner.getPhoneNumber());
         }
-        for (Owner owner : owners) {
+        for (Owner owner : ownerRepository.findAll()) {
 
             //check for user with same vatNumber
-            if (owner.getVatNumber().equals(propertyOwner.getVatNumber())) {
+            if (ownerRepository.existsByVatNumber(propertyOwner.getVatNumber())) {
                 throw new UserAlreadyExistsException("A user with the VAT number '" + propertyOwner.getVatNumber() + "' already exists");
             }
             //check for user with same email
-            if (owner.getEmail().equals(propertyOwner.getEmail())) {
+            if (ownerRepository.existsByEmail(propertyOwner.getEmail())) {
                 throw new UserAlreadyExistsException("A user with the email address '" + propertyOwner.getEmail() + "' already exists");
             }
             //check for user with same phone
-            if (owner.getPhoneNumber().equals(propertyOwner.getPhoneNumber())) {
+
+            if (ownerRepository.existsByPhoneNumber(propertyOwner.getPhoneNumber())) {
                 throw new UserAlreadyExistsException("A user with the phone number '" + propertyOwner.getPhoneNumber() + "' already exists");
             }
 
         }
-        owners.add(propertyOwner);
+        ownerRepository.save(propertyOwner);
         return propertyOwner;
     }
 
 
     @Override
     public Optional<Owner> findUserByVatNumber(String vatNumber) {
-
-        for (Owner owner : owners) {
-            if (owner.getVatNumber().equals(vatNumber)) {
-                return Optional.of(owner);
-            }
-        }
-        return Optional.empty();
+        return ownerRepository.findByVatNumber(vatNumber);
     }
+
 
     @Override
     public Owner updateUser(Owner updatedOwner) {
         // Find the existing owner by VAT number, or throw exception if not found
-        Owner owner = findUserByVatNumber(updatedOwner.getVatNumber())
+        Owner owner = ownerRepository.findByVatNumber(updatedOwner.getVatNumber())
                 .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + updatedOwner.getVatNumber() + " not found"));
 
         //update only the fields that the user has changed and not everything
@@ -90,35 +92,27 @@ public class UserServiceImpl implements UserService {
         if (updatedOwner.getPhoneNumber() != null) owner.setPhoneNumber(updatedOwner.getPhoneNumber());
         if (updatedOwner.getEmail() != null) owner.setEmail(updatedOwner.getEmail());
 
+        ownerRepository.save(owner);
         return owner;
     }
 
     @Override
     public boolean deleteOwner(String vatNumber) {
+        Owner owner = ownerRepository.findByVatNumber(vatNumber)
+                .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + vatNumber + " not found"));
 
-        for (Iterator<Owner> iterator = owners.iterator(); iterator.hasNext(); ) {
-            Owner owner = iterator.next();
-            if (owner.getVatNumber().equals(vatNumber)) {
-                iterator.remove();
-                return true; // Deleted successfully
-            }
-        }
-        return false; // No match found
+        ownerRepository.delete(owner);
+        return true;
     }
 
     @Override
     public Optional<Owner> findUserByEmail(String ownerEmail) {
-        for (Owner owner : owners) {
-            if (owner.getEmail().equals(ownerEmail)) {
-                return Optional.of(owner);
-            }
-        }
-        return Optional.empty();
+        return ownerRepository.findByOwnerEmail(ownerEmail);
     }
 
     @Override
     public Set<Owner> findAllPropertyOwners() {
-        return owners;
+        return new HashSet<>(ownerRepository.findAll());
     }
 
 

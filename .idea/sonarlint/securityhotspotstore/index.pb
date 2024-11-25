@@ -81,10 +81,6 @@ i
 Ptechnico/src/main/java/com/technicoCompany/technico/service/PropertyService.java,8\e\8e9c873eb350a9dcd3ff725bd1f8c1cc7994704e
 Ñ
 Ttechnico/src/main/java/com/technicoCompany/technico/service/PropertyServiceImpl.java,2\8\28e4d40a704b9354aee75dc5e3dc7265300c2343
-|
-Ltechnico/src/main/java/com/technicoCompany/technico/service/UserService.java,1\b\1bc4dffe4a9119a125685750fa7b70b13fc0d2e1
-Ä
-Ptechnico/src/main/java/com/technicoCompany/technico/service/UserServiceImpl.java,e\e\ee3d806b2736e4be31a211d2a2977c8e214fae86
 w
 Gtechnico/src/main/java/com/technicoCompany/technico/model/Property.java,2\8\28e87f1331fc5c627225bab041fb393dececd2bc
 ~
@@ -99,8 +95,6 @@ u
 Etechnico/src/main/java/com/technicoCompany/technico/model/Repair.java,d\1\d16e710d0e57e461ebbd82c2ccce1c05d93f8568
 Ç
 Rtechnico/src/main/java/com/technicoCompany/technico/controller/UserController.java,5\6\563ed8cac758de208001805d84eda7a7ef90fbcc
-Ç
-Rtechnico/src/main/java/com/technicoCompany/technico/repository/UserRepository.java,c\6\c6a404bbbd8041ee54310e4c25517a59e465ed0d
 É
 Stechnico/src/main/java/com/technicoCompany/technico/exception/ExceptionHandler.java,2\f\2fc89a926c5354aedaed85b2c56b5f9b5c277968
 Ü
@@ -217,8 +211,6 @@ Q.idea/sonarlint/securityhotspotstore/8/9/899c0fa384d55ac1f5e112db7cfb88af0cda1e
 Q.idea/sonarlint/securityhotspotstore/8/e/8e9c873eb350a9dcd3ff725bd1f8c1cc7994704e,9\9\99b76cd84eaa1785d623ee735efbc7d987a8955a
 Å
 Q.idea/sonarlint/securityhotspotstore/9/3/93942b34ad371933cca193fb5989c844734fda79,3\0\30a568faf52e172517c1c0a2124d9f909282b6b5
-Å
-Q.idea/sonarlint/securityhotspotstore/e/e/ee3d806b2736e4be31a211d2a2977c8e214fae86,6\8\688a2059f37bdc66c5bd492801523fa78172bacb
 w
 G.idea/sonarlint/issuestore/b/9/b9984ac6cf4b07aeefa6fdbd8cc381617a6f1452,b\c\bca59505d37d4fbc1c46e460bf0ec5eff3211410
 w
@@ -250,8 +242,6 @@ Q.idea/sonarlint/securityhotspotstore/b/0/b0fb0dc44cbbeb639cf2ec0be3b1d85d329252
 w
 G.idea/sonarlint/issuestore/5/b/5b0e53f28de0aaa335f1061da2fd13ed1da05b95,6\8\68eb72cf89607c5eecd79faeb07ea0b3c03df283
 Å
-Q.idea/sonarlint/securityhotspotstore/b/d/bd78cd52b04ed38edb76edb19e0da08a53280079,2\8\28c740c405e11e45cf2c28cb8fa18d381b74fba9
-Å
 Q.idea/sonarlint/securityhotspotstore/b/d/bd0a2c38afa2d7cbfb5e048a9a7d38d2283a551a,3\7\37cbda7ad693e07e80bc57f35bd782e7b0ffa750
 w
 G.idea/sonarlint/issuestore/a/4/a42e7b417776a77dfb65cbc3a1afd6b4330486b9,d\8\d8d62362361652ab253fe210134a8e2103ed43f3
@@ -279,8 +269,6 @@ w
 G.idea/sonarlint/issuestore/5/3/53c495debaddb0c70b285f1a2f703d075adb8db8,c\7\c7ea65db98b35dcd59ffbab064cb283e33a3ec50
 Å
 Q.idea/sonarlint/securityhotspotstore/d/0/d0d66c0f7317b640009265d0629078197d2f5af9,f\6\f62e577cec2df96495610246c4c44b0ebedce8cf
-Å
-Q.idea/sonarlint/securityhotspotstore/c/6/c6a404bbbd8041ee54310e4c25517a59e465ed0d,d\1\d11f63265b9bff26672993e416ed24968bac9403
 w
 G.idea/sonarlint/issuestore/d/d/ddadea25bae12b0a60153d465483f0c41653f497,5\b\5bfbe75231506117108ec3d4f5125b8e0bdd0b69
 Å
@@ -425,12 +413,6 @@ Q.idea/sonarlint/securityhotspotstore/1/e/1e90ede3db0b0e4d8acb6669b7d9b3660cd9d1
 Q.idea/sonarlint/securityhotspotstore/f/5/f539f3715015f8afc223bf85328f5384819ff943,0\0\00d77327b2693edc3bfd7239c452843208e7d55f
 Å
 Q.idea/sonarlint/securityhotspotstore/b/2/b2d9a74ffa9fc314e112f8a784a0251e1f6b2c37,0\1\01a3fbef36413347385828e3e2666a941dc7eb36
-{
-Ktechnico/src/main/java/com/technicoCompany/technico/enums/RepairStatus.java,e\e\eeb05ae44865ec0d169556e6b4b0d3e0760f928e
-y
-Itechnico/src/main/java/com/technicoCompany/technico/enums/RepairType.java,9\8\9821845fce14709d4494f7b342fbc22de525a221
-Å
-Q.idea/sonarlint/securityhotspotstore/1/b/1bc4dffe4a9119a125685750fa7b70b13fc0d2e1,0\6\06c4594d713520e5cc329f328c33300b24fe3d29
 Å
 Q.idea/sonarlint/securityhotspotstore/3/b/3b0c9cf2a19e971f5b9b03d763e61654f2f6bb09,5\1\5146a0be979375b57183e9eec36adf5b5d54608d
 Å
@@ -473,8 +455,6 @@ Q.idea/sonarlint/securityhotspotstore/4/e/4ea07beb554566fde988b26e85e4197fa02c87
 Q.idea/sonarlint/securityhotspotstore/3/9/3907bf00770f527c4126fe6c5ab6939cad5bc309,8\d\8d277e5624050f542a9aea12782bb8cdb8d75a61
 Å
 Q.idea/sonarlint/securityhotspotstore/5/3/53a8b0d118be82bf62d943ed7752d0febf5b84c1,e\f\ef246bcdf6f40247561cf7c9409f022eb2806a80
-w
-Gtechnico/src/main/java/com/technicoCompany/technico/enums/UserRole.java,f\e\fea4214489c7eb8956f69833b838e2ec5a3cf656
 Å
 Q.idea/sonarlint/securityhotspotstore/d/1/d16e710d0e57e461ebbd82c2ccce1c05d93f8568,6\d\6d7562e182b24337fd7700cbbb3d9e94277ee661
 Å
@@ -491,8 +471,6 @@ k
 Q.idea/sonarlint/securityhotspotstore/6/1/61f671b178ce6ee8dd0c8b60093b2e9bc386aab2,c\e\ce00d0ed9e3aecfe419b56aa433dc5b5039db425
 Å
 Q.idea/sonarlint/securityhotspotstore/6/2/6284eecedd2d85fb3913164f96df4582210062ba,c\2\c2b17fcc88c767008f0010b78d75fc3ba497a1c4
-{
-Ktechnico/src/main/java/com/technicoCompany/technico/enums/PropertyType.java,1\d\1d3f445862258eb3ba6da9780f2470e61218de17
 D
 Technico Project.txt,a\a\aa2e59617b6a0cd18c8f13110a38d7ac9db13300
 |
@@ -511,3 +489,27 @@ x
 Htechnico/src/main/java/com/technicoCompany/technico/model/BaseModel.java,9\7\97db2715b20699d3e328e045f414c289b3020918
 |
 Ltechnico/src/main/java/com/technicoCompany/technico/service/BaseServise.java,4\6\461e0e4e87ca2e6a26d6b7c7a958cd7bcbfc5ea4
+Ö
+Utechnico/src/main/java/com/technicoCompany/technico/exception/InvalidIdException.java,3\3\3343713d0191f12d1a52d91e846b3be1174c7b1a
+Å
+Qtechnico/src/main/java/com/technicoCompany/technico/enumeration/RepairStatus.java,0\7\07c70da3426d679be5288dc8d444e63e1411c990
+
+Otechnico/src/main/java/com/technicoCompany/technico/enumeration/RepairType.java,1\9\1933975f512c30ba02cde810010dd0c899bf91bd
+}
+Mtechnico/src/main/java/com/technicoCompany/technico/enumeration/UserRole.java,5\4\54e13f775bf58890a32ac6be6de1762bc6cc0a6d
+Å
+Qtechnico/src/main/java/com/technicoCompany/technico/enumeration/PropertyType.java,a\a\aac5e1ea110448dcae6369bc6311570c9017c33b
+{
+Ktechnico/src/main/java/com/technicoCompany/technico/base/BaseComponent.java,4\3\43b9d4389b791fcc80b0301d6b8f7f2c4f0f3a48
+}
+Mtechnico/src/main/java/com/technicoCompany/technico/service/OwnerService.java,b\c\bc8154006bd7e756209dbdb7ef241e78bc4a27f8
+Å
+Qtechnico/src/main/java/com/technicoCompany/technico/service/OwnerServiceImpl.java,b\8\b896544fe2301c6de4fdc943954c602c5087885d
+Ä
+Ptechnico/src/main/java/com/technicoCompany/technico/service/BaseServiceImpl.java,7\b\7b2192a56505545bb696c6a1e9663c10f63b3730
+t
+Dtechnico/src/main/java/com/technicoCompany/technico/model/Owner.java,7\a\7a05f303431f1970ba5ceabcbbb9ee7e8484c5d3
+É
+Stechnico/src/main/java/com/technicoCompany/technico/repository/OwnerRepository.java,d\b\db8575e95a34ae766b4553d9df0f04827445ae62
+ç
+]technico/src/main/java/com/technicoCompany/technico/bootstrap/OwnerPropertyRepairCreator.java,4\f\4f7946abbdb94f47a608fbc75bdbef67da9727c4

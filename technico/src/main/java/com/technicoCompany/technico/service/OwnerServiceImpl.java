@@ -97,7 +97,7 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
 
     @Override
     public Optional<Owner> findUserByEmail(String ownerEmail) {
-        return ownerRepository.findByOwnerEmail(ownerEmail);
+        return ownerRepository.findByEmail(ownerEmail);
     }
 
     @Override

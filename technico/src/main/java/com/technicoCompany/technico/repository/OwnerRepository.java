@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long>{
     // βγαζει τον owner με βαση το email
-    Optional<Owner> findByOwnerEmail(String ownerEmail);
+    Optional<Owner> findByEmail(String ownerEmail);
 
     boolean existsByVatNumber(String vatNumber);
 

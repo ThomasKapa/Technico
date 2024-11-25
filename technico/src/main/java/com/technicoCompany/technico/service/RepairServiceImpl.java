@@ -34,7 +34,7 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
 
     @Override
     public List<Repair> findRepairsByOwnerVat(String vatNumber) {
-        return repairRepository.findByOwnerVatNumber(vatNumber);
+        return repairRepository.findByOwner_VatNumber(vatNumber);
     }
 
     @Override

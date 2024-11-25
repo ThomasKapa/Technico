@@ -37,7 +37,7 @@ public class Repair extends BaseModel{
     @Column(length = 100, nullable = false)
     private String repairAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Property property;
 
     @Column(length = 500)

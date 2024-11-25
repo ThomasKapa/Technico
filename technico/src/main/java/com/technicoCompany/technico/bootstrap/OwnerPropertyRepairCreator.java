@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Profile("generate-owner-property-repair")
 @RequiredArgsConstructor
 public class OwnerPropertyRepairCreator extends BaseComponent implements CommandLineRunner {
 
@@ -50,23 +49,26 @@ public class OwnerPropertyRepairCreator extends BaseComponent implements Command
                 Owner.builder().role(UserRole.PROPERTY_OWNER).userName("propertyGuru").password("propPass").firstName("Panos").lastName("Georgiou").address("Kolonaki 10").phoneNumber("2101119999").vatNumber("555666777").properties(new ArrayList<>()).email("panos.g@example.com").build(),
                 Owner.builder().role(UserRole.PROPERTY_OWNER).userName("ownerPlus").password("passPlus").firstName("Vasilis").lastName("Manos").address("Exarchia 15").phoneNumber("2108883333").vatNumber("111222333").properties(new ArrayList<>()).email("vasilis.m@example.com").build());
 
+        ownerService.createAll(startingOwners);
 
         List<Property> staringProperties = List.of(
-                Property.builder().propertyIdentificationE9Number("E9-12345").Address("Kifisias 100, Athens").yearOfConstruction("2000").propertyType(PropertyType.DETACHED).owner(startingOwners.get(0)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12346").Address("Vouliagmenis 50, Athens").yearOfConstruction("1995").propertyType(PropertyType.FLAT).owner(startingOwners.get(9)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12347").Address("Patission 20, Athens").yearOfConstruction("2010").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12348").Address("Panepistimiou 15, Athens").yearOfConstruction("1980").propertyType(PropertyType.DETACHED).owner(startingOwners.get(9)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12349").Address("Syntagma Square 1, Athens").yearOfConstruction("2020").propertyType(PropertyType.FLAT).owner(startingOwners.get(1)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12350").Address("Exarchia 5, Athens").yearOfConstruction("1990").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12351").Address("Kolonaki 22, Athens").yearOfConstruction("2005").propertyType(PropertyType.DETACHED).owner(startingOwners.get(1)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12352").Address("Piraeus 10, Athens").yearOfConstruction("1975").propertyType(PropertyType.FLAT).owner(startingOwners.get(1)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12353").Address("Ampelokipoi 33, Athens").yearOfConstruction("2015").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12354").Address("Glyfada 88, Athens").yearOfConstruction("1998").propertyType(PropertyType.DETACHED).owner(startingOwners.get(7)).build());
+                Property.builder().propertyIdentificationE9Number("E9-12345").address("Kifisias 100, Athens").yearOfConstruction("2000").propertyType(PropertyType.DETACHED).owner(startingOwners.get(0)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12346").address("Vouliagmenis 50, Athens").yearOfConstruction("1995").propertyType(PropertyType.FLAT).owner(startingOwners.get(9)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12347").address("Patission 20, Athens").yearOfConstruction("2010").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12348").address("Panepistimiou 15, Athens").yearOfConstruction("1980").propertyType(PropertyType.DETACHED).owner(startingOwners.get(9)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12349").address("Syntagma Square 1, Athens").yearOfConstruction("2020").propertyType(PropertyType.FLAT).owner(startingOwners.get(1)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12350").address("Exarchia 5, Athens").yearOfConstruction("1990").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12351").address("Kolonaki 22, Athens").yearOfConstruction("2005").propertyType(PropertyType.DETACHED).owner(startingOwners.get(1)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12352").address("Piraeus 10, Athens").yearOfConstruction("1975").propertyType(PropertyType.FLAT).owner(startingOwners.get(1)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12353").address("Ampelokipoi 33, Athens").yearOfConstruction("2015").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12354").address("Glyfada 88, Athens").yearOfConstruction("1998").propertyType(PropertyType.DETACHED).owner(startingOwners.get(7)).build());
+
+        propertyService.createAll(staringProperties);
 
         List<Repair> startingRepairs = List.of(
 
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 1, 9, 0)).repairStatus(RepairStatus.PENDING).repairType(RepairType.PAINTING).repairCost(new BigDecimal("1500.00")).repairAddress("Kifisias 100, Athens").property(staringProperties.get(2)).workToBeDone("Repaint all interior walls").build(),
-                Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 5, 10, 30)).repairStatus(RepairStatus.IN_PROGRESS).repairType(RepairType.INSULATION).repairCost(new BigDecimal("2500.00")).repairAddress("Vouliagmenis 50, Athens").property(staringProperties.get(1)).workToBeDone("Install thermal insulation on the roof").build(),
+               Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 5, 10, 30)).repairStatus(RepairStatus.IN_PROGRESS).repairType(RepairType.INSULATION).repairCost(new BigDecimal("2500.00")).repairAddress("Vouliagmenis 50, Athens").property(staringProperties.get(1)).workToBeDone("Install thermal insulation on the roof").build(),
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 11, 28, 14, 0)).repairStatus(RepairStatus.COMPLETE).repairType(RepairType.FRAMES).repairCost(new BigDecimal("1800.00")).repairAddress("Patission 20, Athens").property(staringProperties.get(0)).workToBeDone("Replace window frames in the living room").build(),
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 11, 30, 8, 45)).repairStatus(RepairStatus.PENDING).repairType(RepairType.PLUMBING).repairCost(new BigDecimal("500.00")).repairAddress("Panepistimiou 15, Athens").property(staringProperties.get(3)).workToBeDone("Fix a leaking pipe in the bathroom").build(),
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 10, 13, 15)).repairStatus(RepairStatus.IN_PROGRESS).repairType(RepairType.ELECTRICAL_WORK).repairCost(new BigDecimal("3000.00")).repairAddress("Syntagma Square 1, Athens").property(staringProperties.get(4)).workToBeDone("Upgrade the electrical wiring in the kitchen").build(),
@@ -76,6 +78,8 @@ public class OwnerPropertyRepairCreator extends BaseComponent implements Command
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 8, 10, 0)).repairStatus(RepairStatus.COMPLETE).repairType(RepairType.PLUMBING).repairCost(new BigDecimal("700.00")).repairAddress("Ampelokipoi 33, Athens").property(staringProperties.get(8)).workToBeDone("Replace old plumbing pipes in the basement").build(),
                 Repair.builder().scheduledRepairDate(LocalDateTime.of(2024, 12, 7, 16, 0)).repairStatus(RepairStatus.PENDING).repairType(RepairType.ELECTRICAL_WORK).repairCost(new BigDecimal("2800.00")).repairAddress("Glyfada 88, Athens").property(staringProperties.get(9)).workToBeDone("Install new electrical sockets in all rooms").build());
 
+
+        repairService.createAll(startingRepairs);
     }
 
 }

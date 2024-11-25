@@ -1,8 +1,0 @@
-
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ζχό8†Π„ρ³2
-\
-java:S1118":Add a private constructor to hide the implicit public one.(ΘΕΫϊÿÿÿÿ8™Π„ρ³2
-e
-java:S1128"HRemove this unused import 'com.technicoCompany.technico.enums.UserRole'.(λΆ•¤8™…οσ³2
-L
-java:S1068"*Remove this unused "owners" private field.(ΉελΑψÿÿÿÿ8™…οσ³2

@@ -23,7 +23,7 @@ public class Property extends BaseModel {
     private String propertyIdentificationE9Number;
 
     @Column(length = 100, nullable = false)
-    private String Address;
+    private String address;
 
     @Column(length = 4, nullable = false)
     private String yearOfConstruction;
@@ -32,7 +32,7 @@ public class Property extends BaseModel {
     private PropertyType propertyType;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vatNumber", nullable = false)
+    @JoinColumn(name = "ownerId", nullable = false)
     private Owner owner;
 
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OwnerRepository extends BaseRepository<Owner, Long>{
+public interface OwnerRepository extends JpaRepository<Owner, Long>{
     // βγαζει τον owner με βαση το email
     Optional<Owner> findByOwnerEmail(String ownerEmail);
 

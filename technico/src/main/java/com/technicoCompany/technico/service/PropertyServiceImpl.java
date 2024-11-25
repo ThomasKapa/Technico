@@ -2,9 +2,9 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.InvalidIdException;
 import com.technicoCompany.technico.model.Property;
-import com.technicoCompany.technico.repository.BaseRepository;
 import com.technicoCompany.technico.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +16,13 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
     private final PropertyRepository propertyRepository;
 
     @Override
-    protected BaseRepository<Property, Long> getRepository() {
+    protected JpaRepository<Property, Long> getRepository() {
         return propertyRepository;
     }
 
     @Override
     public Property createProperty(Property property) {
-        propertyRepository.create(property);
+        propertyRepository.save(property);
         return property;
     }
 
@@ -42,14 +42,14 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
 
         if (updatedProperty.getPropertyIdentificationE9Number() != null)
             property.setPropertyIdentificationE9Number(updatedProperty.getPropertyIdentificationE9Number());
-        if (updatedProperty.getPropertyAddress() != null)
-            property.setPropertyAddress(updatedProperty.getPropertyAddress());
+        if (updatedProperty.getAddress() != null)
+            property.setAddress(updatedProperty.getAddress());
         if (updatedProperty.getYearOfConstruction() != null)
             property.setYearOfConstruction(updatedProperty.getYearOfConstruction());
         if (updatedProperty.getPropertyType() != null)
             property.setPropertyType(updatedProperty.getPropertyType());
 
-        propertyRepository.create(property);
+        propertyRepository.save(property);
         return property;
     }
 

@@ -23,7 +23,7 @@ public class Property extends BaseModel {
     private String propertyIdentificationE9Number;
 
     @Column(length = 100, nullable = false)
-    private String propertyAddress;
+    private String Address;
 
     @Column(length = 4, nullable = false)
     private String yearOfConstruction;

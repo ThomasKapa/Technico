@@ -3,18 +3,18 @@ package com.technicoCompany.technico.service;
 import com.technicoCompany.technico.base.BaseComponent;
 import com.technicoCompany.technico.exception.InvalidIdException;
 import com.technicoCompany.technico.model.BaseModel;
-import com.technicoCompany.technico.repository.BaseRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Arrays;
 import java.util.List;
 
 
 public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent implements BaseServise<T, Long> {
-    protected abstract BaseRepository<T, Long> getRepository();
+    protected abstract JpaRepository<T, Long> getRepository();
 
     @Override
     public T create(final T item) {
-        return getRepository().create(item);
+        return getRepository().save(item);
     }
 
     @Override
@@ -24,12 +24,12 @@ public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent
 
     @Override
     public List<T> createAll(final List<T> items) {
-        return getRepository().createAll(items);
+        return getRepository().saveAll(items);
     }
 
     @Override
     public void update(final T item) {
-        getRepository().update(item);
+        getRepository().save(item);
 
     }
 
@@ -47,15 +47,15 @@ public abstract class BaseServiceImpl<T extends BaseModel> extends BaseComponent
 
     @Override
     public T get(final Long id) {
-        if (getRepository().get(id) == null) {
+        if (getRepository().getById(id) == null) {
             throw new InvalidIdException(String.format("Resource with id [%d] not found", id));
         }
-        return getRepository().get(id);
+        return getRepository().getById(id);
     }
 
     @Override
     public boolean exists(final T item) {
-        return getRepository().exists(item);
+        return false;
     }
 
     @Override

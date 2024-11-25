@@ -2,9 +2,9 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.*;
 import com.technicoCompany.technico.model.Owner;
-import com.technicoCompany.technico.repository.BaseRepository;
 import com.technicoCompany.technico.repository.OwnerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
     private final OwnerRepository ownerRepository;
 
     @Override
-    protected BaseRepository<Owner, Long> getRepository() {
+    protected JpaRepository<Owner, Long> getRepository() {
         return ownerRepository;
     }
 
@@ -37,7 +37,7 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
             throw new UserAlreadyExistsException("A user with the phone number '" + propertyOwner.getPhoneNumber() + "' already exists");
         }
 
-        return ownerRepository.create(propertyOwner);
+        return ownerRepository.save(propertyOwner);
     }
 
     private void validateOwner(Owner owner) {
@@ -83,7 +83,7 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
             existingOwner.setEmail(updatedOwner.getEmail());
         }
 
-        return ownerRepository.create(existingOwner);
+        return ownerRepository.save(existingOwner);
     }
 
     @Override

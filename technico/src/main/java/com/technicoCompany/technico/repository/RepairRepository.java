@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
-public interface RepairRepository extends BaseRepository<Repair, Long> {
+public interface RepairRepository extends JpaRepository<Repair, Long> {
     // βγαζει τα repairs με βαση το αφμ
     List<Repair> findByOwnerVatNumber(String vatNumber);
 

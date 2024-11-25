@@ -2,9 +2,9 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.ResourceNotFoundException;
 import com.technicoCompany.technico.model.Repair;
-import com.technicoCompany.technico.repository.BaseRepository;
 import com.technicoCompany.technico.repository.RepairRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,12 +18,12 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
     private final RepairRepository repairRepository;
 
     @Override
-    protected BaseRepository<Repair, Long> getRepository() {
+    protected JpaRepository<Repair, Long> getRepository() {
         return repairRepository;
     }
     @Override
     public Repair createRepair(Repair repair) {
-        repairRepository.create(repair);
+        repairRepository.save(repair);
         return repair;
     }
 
@@ -57,7 +57,7 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
         if (updatedRepair.getRepairAddress() != null) repair.setRepairAddress(updatedRepair.getRepairAddress());
         if (updatedRepair.getWorkToBeDone() != null) repair.setWorkToBeDone(updatedRepair.getWorkToBeDone());
 
-        repairRepository.create(repair);
+        repairRepository.save(repair);
         return repair;
     }
 

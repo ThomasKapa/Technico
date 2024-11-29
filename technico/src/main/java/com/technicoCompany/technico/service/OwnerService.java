@@ -14,7 +14,9 @@ public interface OwnerService extends BaseServise<Owner, Long>{
 
     Owner updateUser(Owner updatedOwner);
 
-    boolean deleteOwner(String vatNumber);
+    boolean deleteOwnerByVatnumber(String vatNumber);
+
+    boolean deleteOwnerByEmail(String email);
 
     Optional<Owner> findUserByEmail(String ownerEmail);
 

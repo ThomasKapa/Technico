@@ -87,9 +87,17 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
     }
 
     @Override
-    public boolean deleteOwner(String vatNumber) {
+    public boolean deleteOwnerByVatnumber(String vatNumber) {
         Owner owner = ownerRepository.findByVatNumber(vatNumber)
                 .orElseThrow(() -> new InvalidVatNumberException("User with VAT number " + vatNumber + " not found"));
+
+        ownerRepository.delete(owner);
+        return true;
+    }
+
+    public boolean deleteOwnerByEmail(String email) {
+        Owner owner = ownerRepository.findByEmail(email)
+                .orElseThrow(() -> new InvalidVatNumberException("User with email " + email + " not found"));
 
         ownerRepository.delete(owner);
         return true;

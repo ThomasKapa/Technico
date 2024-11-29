@@ -69,8 +69,8 @@ public class UserController {
 
     //updated to return a message if user not found.
     @DeleteMapping("/{vatNumber}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String vatNumber) {
-        boolean isDeleted = ownerService.deleteOwner(vatNumber);
+    public ResponseEntity<Void> deleteUserByVat(@PathVariable String vatNumber) {
+        boolean isDeleted = ownerService.deleteOwnerByVatnumber(vatNumber);
         // If found and deleted
         if (isDeleted) {
             return ResponseEntity.noContent().build();
@@ -79,5 +79,14 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
+        boolean isDeleted = ownerService.deleteOwnerByEmail(email);
+        // If found and deleted
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        // If not found
+        return ResponseEntity.notFound().build();
+    }
 }

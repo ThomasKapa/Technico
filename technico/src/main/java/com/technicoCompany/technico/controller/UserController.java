@@ -56,11 +56,23 @@ public class UserController {
 
     //updated to return a message if user not found.
     @PutMapping("/{vatNumber}")
-    public ResponseEntity<Owner> updateUser(@PathVariable String vatNumber, @RequestBody Owner propertyOwner) {
+    public ResponseEntity<Owner> updateUserByVatnumber(@PathVariable String vatNumber, @RequestBody Owner propertyOwner) {
         boolean userExists = ownerService.findUserByVatNumber(vatNumber).isPresent();
 
         if (userExists) {
             propertyOwner.setVatNumber(vatNumber);
+            return ResponseEntity.ok(ownerService.updateUser(propertyOwner));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{email}")
+    public ResponseEntity<Owner> updateUserByEmail(@PathVariable String email, @RequestBody Owner propertyOwner) {
+        boolean userExists = ownerService.findUserByEmail(email).isPresent();
+
+        if (userExists) {
+            propertyOwner.setEmail(email);
             return ResponseEntity.ok(ownerService.updateUser(propertyOwner));
         } else {
             return ResponseEntity.notFound().build();

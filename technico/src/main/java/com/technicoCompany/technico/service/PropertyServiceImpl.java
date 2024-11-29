@@ -54,7 +54,7 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
     }
 
     @Override
-    public boolean deleteProperty(Long propertyId) {
+    public boolean deletePropertyById(Long propertyId) {
         Optional<Property> property = propertyRepository.findById(propertyId);
         if (property.isPresent()) {
             propertyRepository.delete(property.get());

@@ -57,14 +57,27 @@ public class PropertyController {
     @GetMapping("/owner/{vatNumber}")
     public ResponseEntity<List<Property>> getPropertiesByOwnerVat(@PathVariable String vatNumber) {
         List<Property> properties = propertyService.findPropertiesByOwnerVat(vatNumber);
+
+        if (properties.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(properties);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Property> updatePropertyById(@PathVariable Long id, @RequestBody Property property) {
-        property.setId(id);
-        return ResponseEntity.ok(propertyService.updateProperty(property));
+        Optional<Property> existingProperty = propertyService.findPropertyById(id);
+
+        if (existingProperty.isPresent()) {
+            property.setId(id);
+            Property updatedProperty = propertyService.updateProperty(property);
+            return ResponseEntity.ok(updatedProperty);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+
 
     @PutMapping("/owner/{vatNumber}")
     public ResponseEntity<Property> updatePropertyByVatnumber(@PathVariable String vatNumber, @RequestBody Property property) {
@@ -82,9 +95,14 @@ public class PropertyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProperty(@PathVariable Long id) {
-        propertyService.deleteProperty(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deletePropertyById(@PathVariable Long id) {
+        boolean isDeleted = propertyService.deletePropertyById(id);
+        //if found and deleted
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        //if not found
+        return ResponseEntity.notFound().build();
     }
 
 

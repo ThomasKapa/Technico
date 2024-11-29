@@ -14,5 +14,5 @@ public interface PropertyService extends BaseServise<Property, Long>{
 
     Property updateProperty(Property updatedProperty);
 
-    boolean deleteProperty(Long propertyId);
+    boolean deletePropertyById(Long propertyId);
 }

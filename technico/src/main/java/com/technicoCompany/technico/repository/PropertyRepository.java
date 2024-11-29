@@ -18,5 +18,5 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     // βγαζει oλα τα property του owner με βαση το αφμ
     List<Property> findByOwnerVatNumberOrderByAddress(String vatNumber);
 
-    Optional<Property> findPropertyByOwnerVat(String vatNumber);
+    Optional<Property> findPropertyByOwnerVatNumber(String vatNumber);
 }

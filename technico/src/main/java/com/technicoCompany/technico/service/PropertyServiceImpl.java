@@ -63,5 +63,15 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
         return false;
     }
 
+    @Override
+    public boolean deletePropertyByOwnerVat(String vatNumber) {
+        Optional<Property> property = propertyRepository.findPropertyByOwnerVat(vatNumber);
+        if (property.isPresent()) {
+            propertyRepository.delete(property.get());
+            return true;
+        }
+        return false;
+    }
+
 
 }

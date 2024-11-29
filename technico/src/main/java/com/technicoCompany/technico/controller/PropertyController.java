@@ -78,7 +78,6 @@ public class PropertyController {
     }
 
 
-
     @PutMapping("/owner/{vatNumber}")
     public ResponseEntity<Property> updatePropertyByVatnumber(@PathVariable String vatNumber, @RequestBody Property property) {
         // Retrieve the owner by VAT number
@@ -105,5 +104,15 @@ public class PropertyController {
         return ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePropertyByOwnerVat(@PathVariable String vatNumber) {
+        boolean isDeleted = propertyService.deletePropertyByOwnerVat(vatNumber);
+        //if found and deleted
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        //if not found
+        return ResponseEntity.notFound().build();
+    }
 
 }

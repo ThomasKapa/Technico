@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.technicoCompany.technico.enumeration.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,7 @@ public class Property extends BaseModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ownerId", nullable = false)
+    @JsonIgnore
     private Owner owner;
 
 }

@@ -104,8 +104,8 @@ public class PropertyController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePropertyByOwnerVat(@PathVariable String vatNumber) {
+    @DeleteMapping("/owner/{vatNumber}")
+    public ResponseEntity<Void> deletePropertyByOwnerVat(@PathVariable String vatNumber, @RequestBody Property property) {
         boolean isDeleted = propertyService.deletePropertyByOwnerVat(vatNumber);
         //if found and deleted
         if (isDeleted) {

@@ -5,6 +5,7 @@ import com.technicoCompany.technico.service.RepairService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -19,8 +20,11 @@ public class RepairController {
 
     @PostMapping
     public ResponseEntity<Repair> createRepair(@RequestBody Repair repair) {
-        return ResponseEntity.ok(repairService.createRepair(repair));
+        Repair createdRepair = repairService.createRepair(repair);
+        return ResponseEntity.created(URI.create("/repairs/" + createdRepair.getId()))
+                .body(createdRepair);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Repair> getRepairById(@PathVariable Long id) {

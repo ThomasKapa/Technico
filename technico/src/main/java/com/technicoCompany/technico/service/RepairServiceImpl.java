@@ -72,5 +72,10 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
         return false;
     }
 
+    @Override
+    public List<Repair> findRepairsByOwnerId(Long id) {
+        return repairRepository.findRepairsByPropertyOwnerId(id);
+    }
+
 
 }

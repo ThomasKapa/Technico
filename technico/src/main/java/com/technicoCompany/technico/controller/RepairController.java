@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Repair;
 import com.technicoCompany.technico.service.RepairService;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/repairs")
@@ -15,7 +17,18 @@ public class RepairController {
     private final RepairService repairService;
 
     public RepairController(RepairService repairService) {
+
         this.repairService = repairService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Repair>> getAllRepairs() {
+        List<Repair> repairs = repairService.findAll();
+        if (!repairs.isEmpty()) {
+            return ResponseEntity.ok(repairs);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @PostMapping
@@ -36,11 +49,28 @@ public class RepairController {
         }
     }
 
-    @GetMapping("/owner/{vatNumber}")
-    public ResponseEntity<List<Repair>> getRepairsByOwnerVat(@PathVariable String vatNumber) {
-        List<Repair> repairs = repairService.findRepairsByOwnerVat(vatNumber);
+    @GetMapping("/owner/{id}")
+    public ResponseEntity<List<Repair>> getRepairsByOwnerVat(@PathVariable Long id) {
+        List<Repair> repairs = repairService.findRepairsByOwnerId(id);
+        if (repairs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(repairs);
     }
+
+    @GetMapping("/rangeOfDates")
+    public ResponseEntity<List<Repair>> getRepairsByRangeOfDates(
+            @RequestParam String startDate,
+            @RequestParam String endDate) {
+
+        List<Repair> repairs = repairService.findRepairsByDateRange(startDate, endDate);
+
+        if (repairs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(repairs);
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Repair> updateRepair(@PathVariable Long id, @RequestBody Repair repair) {
@@ -53,14 +83,6 @@ public class RepairController {
         repairService.deleteRepair(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
-
-
 
 
 }

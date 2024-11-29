@@ -1,26 +1,48 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
+import com.technicoCompany.technico.service.OwnerService;
+import com.technicoCompany.technico.service.OwnerServiceImpl;
 import com.technicoCompany.technico.service.PropertyService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/properties")
 public class PropertyController {
 
     private final PropertyService propertyService;
+    private final OwnerService ownerService;
 
-    public PropertyController(PropertyService propertyService) {
+    public PropertyController(PropertyService propertyService, OwnerService ownerService) {
         this.propertyService = propertyService;
+        this.ownerService = ownerService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Property>> getAllProperties() {
+        List<Property> properties = propertyService.findAll();
+
+        if (!properties.isEmpty()) {
+            return ResponseEntity.ok(properties);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @PostMapping
     public ResponseEntity<Property> createProperty(@RequestBody Property property) {
-        return ResponseEntity.ok(propertyService.createProperty(property));
+        Property createdProperty = propertyService.createProperty(property);
+        return ResponseEntity.created(URI.create("/properties/" + createdProperty.getId()))
+                .body(createdProperty);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Property> getPropertyById(@PathVariable Long id) {
@@ -39,9 +61,24 @@ public class PropertyController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Property> updateProperty(@PathVariable Long id, @RequestBody Property property) {
+    public ResponseEntity<Property> updatePropertyById(@PathVariable Long id, @RequestBody Property property) {
         property.setId(id);
         return ResponseEntity.ok(propertyService.updateProperty(property));
+    }
+
+    @PutMapping("/owner/{vatNumber}")
+    public ResponseEntity<Property> updatePropertyByVatnumber(@PathVariable String vatNumber, @RequestBody Property property) {
+        // Retrieve the owner by VAT number
+        Optional<Owner> ownerOptional = ownerService.findUserByVatNumber(vatNumber);
+
+        if (ownerOptional.isPresent()) {
+            Owner owner = ownerOptional.get();
+            property.setOwner(owner);
+            Property updatedProperty = propertyService.updateProperty(property);
+            return ResponseEntity.ok(updatedProperty);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -49,12 +86,6 @@ public class PropertyController {
         propertyService.deleteProperty(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
-
-
-
 
 
 }

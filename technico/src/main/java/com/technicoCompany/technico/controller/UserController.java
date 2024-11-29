@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Set;
 
@@ -41,8 +42,11 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<Owner> createUser(@RequestBody Owner propertyOwner) {
-        return ResponseEntity.ok(ownerService.createUser(propertyOwner));
+        Owner createdOwner = ownerService.createUser(propertyOwner);
+        return ResponseEntity.created(URI.create("/users/" + createdOwner.getId()))
+                .body(createdOwner);
     }
+
 
     @GetMapping("{vatNumber}")
     public ResponseEntity<Owner> getUserByVat(@PathVariable String vatNumber) {

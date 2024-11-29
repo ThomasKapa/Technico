@@ -22,7 +22,8 @@ public interface RepairRepository extends JpaRepository<Repair, Long> {
     // βγαζει τα repairs με βαση το ευρος των ημερομηνιων
     List<Repair> findByScheduledRepairDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
-    Optional<Repair> findOneRepairByOwnerId(Long id);
+    @Query("SELECT r FROM Repair r WHERE r.property.owner.id = :id")
+    Optional<Repair> findOneRepairByOwnerId(@Param("id") Long id);
 
     @Query("SELECT r FROM Repair r WHERE r.scheduledRepairDate BETWEEN :startDate AND :endDate")
     Optional<Repair> findOneRepairByRangeOfDates(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);

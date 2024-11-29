@@ -113,5 +113,10 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
         return new HashSet<>(ownerRepository.findAll());
     }
 
+    @Override
+    public Optional<Owner> findOwnerById(Long id) {
+        return ownerRepository.findOwnerById(id);
+    }
+
 
 }

@@ -1,13 +1,18 @@
 package com.technicoCompany.technico.controller;
 
 import com.technicoCompany.technico.model.Owner;
+import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.model.Repair;
+import com.technicoCompany.technico.service.OwnerService;
 import com.technicoCompany.technico.service.RepairService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -15,10 +20,12 @@ import java.util.Set;
 public class RepairController {
 
     private final RepairService repairService;
+    private final OwnerService ownerService;
 
-    public RepairController(RepairService repairService) {
+    public RepairController(RepairService repairService, OwnerService ownerService) {
 
         this.repairService = repairService;
+        this.ownerService = ownerService;
     }
 
     @GetMapping
@@ -78,11 +85,51 @@ public class RepairController {
         return ResponseEntity.ok(repairService.updateRepair(repair));
     }
 
+    @PutMapping("/owner/{id}")
+    public ResponseEntity<Repair> updateRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
+        Optional<Owner> ownerOptional = ownerService.findOwnerById(id);
+
+        if (ownerOptional.isPresent()) {
+            Owner owner = ownerOptional.get();
+
+            if (repair.getProperty() != null) {
+                // Set the owner to the property of the repair
+                repair.getProperty().setOwner(owner);
+            } else {
+                // If property is null, handle it (optional)
+                return ResponseEntity.badRequest().build();
+            }
+            Repair updatedRepair = repairService.updateRepair(repair);
+            return ResponseEntity.ok(updatedRepair);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @PutMapping("/rangeOfDates")
+    public ResponseEntity<Repair> updateRepairByRangeOfDates(
+            @RequestParam String startDate,
+            @RequestParam String endDate) {
+
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        Optional<Repair> repairOptional = repairService.findOneRepairByRangeOfDates(startDate, endDate);
+
+        if (repairOptional.isPresent()) {
+            Repair repair = repairOptional.get();
+            Repair updatedRepair = repairService.updateRepair(repair);
+            return ResponseEntity.ok(updatedRepair);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRepair(@PathVariable Long id) {
         repairService.deleteRepair(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
+

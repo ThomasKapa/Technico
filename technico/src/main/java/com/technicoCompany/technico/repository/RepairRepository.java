@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RepairRepository extends JpaRepository<Repair, Long> {
@@ -20,4 +21,8 @@ public interface RepairRepository extends JpaRepository<Repair, Long> {
 
     // βγαζει τα repairs με βαση το ευρος των ημερομηνιων
     List<Repair> findByScheduledRepairDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+
+    Optional<Repair> findOneRepairByOwnerId(Long id);
+
+    Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate);
 }

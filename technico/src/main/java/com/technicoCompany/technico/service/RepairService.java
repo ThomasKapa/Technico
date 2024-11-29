@@ -19,4 +19,8 @@ public interface RepairService extends BaseServise<Repair, Long> {
     boolean deleteRepair(Long repairId);
 
     List<Repair> findRepairsByOwnerId(Long id);
+
+    Optional<Repair> findOneRepairByOwnerId(Long id);
+
+    Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate);
 }

@@ -22,4 +22,5 @@ public interface OwnerService extends BaseServise<Owner, Long>{
 
     public Set<Owner> findAllPropertyOwners();
 
+    Optional<Owner> findOwnerById(Long id);
 }

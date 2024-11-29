@@ -80,7 +80,6 @@ public class PropertyController {
 
     @PutMapping("/owner/{vatNumber}")
     public ResponseEntity<Property> updatePropertyByVatnumber(@PathVariable String vatNumber, @RequestBody Property property) {
-        // Retrieve the owner by VAT number
         Optional<Owner> ownerOptional = ownerService.findUserByVatNumber(vatNumber);
 
         if (ownerOptional.isPresent()) {

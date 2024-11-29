@@ -20,4 +20,5 @@ public interface OwnerRepository extends JpaRepository<Owner, Long>{
     Optional<Owner> findByVatNumber(String vatNumber);
 
 
+    Optional<Owner> findOwnerById(Long id);
 }

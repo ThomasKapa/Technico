@@ -77,5 +77,15 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
         return repairRepository.findRepairsByPropertyOwnerId(id);
     }
 
+    @Override
+    public Optional<Repair> findOneRepairByOwnerId(Long id) {
+        return repairRepository.findOneRepairByOwnerId(id);
+    }
+
+    @Override
+    public Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate) {
+        return repairRepository.findOneRepairByRangeOfDates(startDate,endDate);
+    }
+
 
 }

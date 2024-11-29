@@ -2,6 +2,8 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.model.Repair;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,15 @@ public interface RepairService extends BaseServise<Repair, Long> {
 
     Repair updateRepair(Repair updatedRepair);
 
-    boolean deleteRepair(Long repairId);
+    boolean deleteRepairById(Long repairId);
 
     List<Repair> findRepairsByOwnerId(Long id);
 
     Optional<Repair> findOneRepairByOwnerId(Long id);
 
-    Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate);
+    Optional<Repair> findOneRepairByRangeOfDates(LocalDateTime startDate, LocalDateTime endDate);
+
+    boolean deleteRepairByOwnerId(Long id);
+
+    boolean deleteRepairsByDateRange(LocalDateTime start, LocalDateTime end);
 }

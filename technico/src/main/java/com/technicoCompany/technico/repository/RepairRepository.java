@@ -24,5 +24,5 @@ public interface RepairRepository extends JpaRepository<Repair, Long> {
 
     Optional<Repair> findOneRepairByOwnerId(Long id);
 
-    Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate);
+    Optional<Repair> findOneRepairByRangeOfDates(LocalDateTime startDate, LocalDateTime endDate);
 }

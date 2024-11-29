@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
     protected JpaRepository<Repair, Long> getRepository() {
         return repairRepository;
     }
+
     @Override
     public Repair createRepair(Repair repair) {
         repairRepository.save(repair);
@@ -63,7 +65,7 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
 
 
     @Override
-    public boolean deleteRepair(Long repairId) {
+    public boolean deleteRepairById(Long repairId) {
         Optional<Repair> repair = repairRepository.findById(repairId);
         if (repair.isPresent()) {
             repairRepository.delete(repair.get());
@@ -83,9 +85,30 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
     }
 
     @Override
-    public Optional<Repair> findOneRepairByRangeOfDates(String startDate, String endDate) {
-        return repairRepository.findOneRepairByRangeOfDates(startDate,endDate);
+    public Optional<Repair> findOneRepairByRangeOfDates(LocalDateTime startDate, LocalDateTime endDate) {
+        return repairRepository.findOneRepairByRangeOfDates(startDate, endDate);
     }
+
+    @Override
+    public boolean deleteRepairByOwnerId(Long id) {
+        Optional<Repair> repair = repairRepository.findOneRepairByOwnerId(id);
+        if (repair.isPresent()) {
+            repairRepository.delete(repair.get());
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean deleteRepairsByDateRange(LocalDateTime start, LocalDateTime end) {
+        Optional<Repair> repair = repairRepository.findOneRepairByRangeOfDates(start, end);
+       if (repair.isPresent()){
+        repairRepository.delete(repair.get());
+        return true;
+    }
+    return false;
+}
 
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.swing.text.html.Option;
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -109,11 +110,8 @@ public class RepairController {
 
     @PutMapping("/rangeOfDates")
     public ResponseEntity<Repair> updateRepairByRangeOfDates(
-            @RequestParam String startDate,
-            @RequestParam String endDate) {
-
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+            @RequestParam LocalDateTime startDate,
+            @RequestParam LocalDateTime endDate) {
 
         Optional<Repair> repairOptional = repairService.findOneRepairByRangeOfDates(startDate, endDate);
 
@@ -128,8 +126,38 @@ public class RepairController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRepair(@PathVariable Long id) {
-        repairService.deleteRepair(id);
-        return ResponseEntity.noContent().build();
+        boolean isDeleted = repairService.deleteRepairById(id);
+        //if found and deleted
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        //if not found
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/rangeOfDates")
+    public ResponseEntity<Void> deleteRepairByrangeOfDates(
+            @RequestParam LocalDateTime startDate,
+            @RequestParam LocalDateTime endDate) {
+
+        boolean deleted = repairService.deleteRepairsByDateRange(startDate, endDate);
+
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @DeleteMapping("/owner/{id}")
+    public ResponseEntity<Void> deleteRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
+        boolean isDeleted = repairService.deleteRepairByOwnerId(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
+
 

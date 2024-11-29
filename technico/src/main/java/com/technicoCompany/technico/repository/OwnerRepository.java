@@ -18,4 +18,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long>{
     boolean existsByPhoneNumber(String phoneNumber);
 
     Optional<Owner> findByVatNumber(String vatNumber);
+
+
 }

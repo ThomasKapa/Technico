@@ -2,6 +2,7 @@ package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.model.Owner;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 

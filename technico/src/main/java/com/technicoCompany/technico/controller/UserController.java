@@ -6,11 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
     @Autowired
     private final OwnerService ownerService;
+
+    public UserController(OwnerService ownerService) {
+        this.ownerService = ownerService;
+    }
+
+    @GetMapping
+    public ResponseEntity<Set<Owner>> getAllOwners() {
+        Set<Owner> owners = ownerService.findAllPropertyOwners();
+        if (!owners.isEmpty()) {
+            return ResponseEntity.ok(owners);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
+    }
 
     @GetMapping("{email}")
     public ResponseEntity<Owner> getUserByEmail(@PathVariable String email) {
@@ -20,10 +37,6 @@ public class UserController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    public UserController(OwnerService ownerService) {
-        this.ownerService = ownerService;
     }
 
     @PostMapping

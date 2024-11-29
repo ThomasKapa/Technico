@@ -12,9 +12,16 @@ public class UserController {
     @Autowired
     private final OwnerService ownerService;
 
-    //Αγνοήστε αυτή την έφτιαξα για έλεγχο
-    @GetMapping("check")
-     public ResponseEntity<String> testEndpoint() {    return ResponseEntity.ok("PropertyOwner endpoint is working!");}
+    @GetMapping("{email}")
+    public ResponseEntity<Owner> getUserByEmail(@PathVariable String email) {
+        Owner propertyOwner = ownerService.findUserByEmail(email).orElse(null);
+        if (propertyOwner != null) {
+            return ResponseEntity.ok(propertyOwner);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     public UserController(OwnerService ownerService) {
         this.ownerService = ownerService;
     }

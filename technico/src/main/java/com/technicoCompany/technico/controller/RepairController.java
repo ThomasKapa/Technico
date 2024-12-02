@@ -57,7 +57,7 @@ public class RepairController {
         }
     }
 
-    @GetMapping("/owner/{id}")
+    @GetMapping("/owners/{id}")
     public ResponseEntity<List<Repair>> getRepairsByOwnerVat(@PathVariable Long id) {
         List<Repair> repairs = repairService.findRepairsByOwnerId(id);
         if (repairs.isEmpty()) {
@@ -86,7 +86,7 @@ public class RepairController {
         return ResponseEntity.ok(repairService.updateRepair(repair));
     }
 
-    @PutMapping("/owner/{id}")
+    @PutMapping("/owners/{id}")
     public ResponseEntity<Repair> updateRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
         Optional<Owner> ownerOptional = ownerService.findOwnerById(id);
 
@@ -150,7 +150,7 @@ public class RepairController {
     }
 
 
-    @DeleteMapping("/owner/{id}")
+    @DeleteMapping("/owners/{id}")
     public ResponseEntity<Void> deleteRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
         boolean isDeleted = repairService.deleteRepairByOwnerId(id);
         if (isDeleted) {

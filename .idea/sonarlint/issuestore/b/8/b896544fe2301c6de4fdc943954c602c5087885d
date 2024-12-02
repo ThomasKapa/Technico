@@ -1,0 +1,10 @@
+
+h
+java:S1192A"KDefine a constant instead of duplicating this literal " not found" 3 times.(€ŒÚ8èèÿÅ·2
+n
+java:S1192"QDefine a constant instead of duplicating this literal "' already exists" 5 times.(œ–¹8èèÿÅ·2
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ªİ·ìüÿÿÿÿ8ëèÿÅ·2
+i
+java:S59980"LRefactor this repetition that can lead to a stack overflow for large inputs.(Şùš¹8…éÿÅ·2
+Y
+java:S63534"<Use concise character class syntax '\\d' instead of '[0-9]'.(Áá˜¥8†éÿÅ·2

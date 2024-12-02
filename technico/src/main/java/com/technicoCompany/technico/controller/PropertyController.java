@@ -84,6 +84,7 @@ public class PropertyController {
 
         if (ownerOptional.isPresent()) {
             Owner owner = ownerOptional.get();
+            //todo change to property service
             property.setOwner(owner);
             Property updatedProperty = propertyService.updateProperty(property);
             return ResponseEntity.ok(updatedProperty);

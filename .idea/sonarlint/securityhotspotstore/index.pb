@@ -513,3 +513,5 @@ Dtechnico/src/main/java/com/technicoCompany/technico/model/Owner.java,7\a\7a05f
 Stechnico/src/main/java/com/technicoCompany/technico/repository/OwnerRepository.java,d\b\db8575e95a34ae766b4553d9df0f04827445ae62
 ç
 ]technico/src/main/java/com/technicoCompany/technico/bootstrap/OwnerPropertyRepairCreator.java,4\f\4f7946abbdb94f47a608fbc75bdbef67da9727c4
+Ä
+Ptechnico/src/main/java/com/technicoCompany/technico/configuration/WebConfig.java,e\4\e4351492e05a543e99801c695b01a6c5b36b0dd5

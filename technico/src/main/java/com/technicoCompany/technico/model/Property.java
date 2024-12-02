@@ -5,6 +5,8 @@ import com.technicoCompany.technico.enumeration.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -36,5 +38,9 @@ public class Property extends BaseModel {
     @JoinColumn(name = "ownerId", nullable = false)
     @JsonIgnore
     private Owner owner;
+
+    @OneToMany(mappedBy = "property",
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Repair> repairs;
 
 }

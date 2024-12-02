@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.technicoCompany.technico.enumeration.RepairStatus;
 import com.technicoCompany.technico.enumeration.RepairType;
 import jakarta.persistence.*;
@@ -38,6 +39,7 @@ public class Repair extends BaseModel{
     private String repairAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Property property;
 
     @Column(length = 500)

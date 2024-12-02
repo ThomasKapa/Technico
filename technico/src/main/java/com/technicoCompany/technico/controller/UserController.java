@@ -31,7 +31,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<Owner> getUserByEmail(@PathVariable String email) {
         Owner propertyOwner = ownerService.findUserByEmail(email).orElse(null);
         if (propertyOwner != null) {
@@ -49,7 +49,7 @@ public class UserController {
     }
 
 
-    @GetMapping("{vatNumber}")
+    @GetMapping("/vat/{vatNumber}")
     public ResponseEntity<Owner> getUserByVat(@PathVariable String vatNumber) {
         Owner propertyOwner = ownerService.findUserByVatNumber(vatNumber).orElse(null);
         if (propertyOwner != null) {

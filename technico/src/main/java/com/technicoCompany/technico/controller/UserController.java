@@ -31,7 +31,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("{email}")
+    @GetMapping("/emails/{email}")
     public ResponseEntity<Owner> getUserByEmail(@PathVariable String email) {
         Owner propertyOwner = ownerService.findUserByEmail(email).orElse(null);
         if (propertyOwner != null) {
@@ -49,7 +49,7 @@ public class UserController {
     }
 
 
-    @GetMapping("{vatNumber}")
+    @GetMapping("/vat/{vatNumber}")
     public ResponseEntity<Owner> getUserByVat(@PathVariable String vatNumber) {
         Owner propertyOwner = ownerService.findUserByVatNumber(vatNumber).orElse(null);
         if (propertyOwner != null) {
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     //updated to return a message if user not found.
-    @PutMapping("/{vatNumber}")
+    @PutMapping("/user/update-by-vatNumber/{vatNumber}")
     public ResponseEntity<Owner> updateUserByVatnumber(@PathVariable String vatNumber, @RequestBody Owner propertyOwner) {
         boolean userExists = ownerService.findUserByVatNumber(vatNumber).isPresent();
 
@@ -72,7 +72,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{email}")
+    @PutMapping("/user/update-by-email/{email}")
     public ResponseEntity<Owner> updateUserByEmail(@PathVariable String email, @RequestBody Owner propertyOwner) {
         boolean userExists = ownerService.findUserByEmail(email).isPresent();
 
@@ -85,7 +85,7 @@ public class UserController {
     }
 
     //updated to return a message if user not found.
-    @DeleteMapping("/{vatNumber}")
+    @DeleteMapping("/user/delete-by-vat/{vatNumber}")
     public ResponseEntity<Void> deleteUserByVat(@PathVariable String vatNumber) {
         boolean isDeleted = ownerService.deleteOwnerByVatnumber(vatNumber);
         // If found and deleted
@@ -96,7 +96,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{email}")
+    @DeleteMapping("/user/delete-by-email/{email}")
     public ResponseEntity<Void> deleteUserByEmail(@PathVariable String email) {
         boolean isDeleted = ownerService.deleteOwnerByEmail(email);
         // If found and deleted

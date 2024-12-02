@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.exception.ResourceNotFoundException;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.model.Repair;
@@ -88,22 +89,13 @@ public class RepairController {
 
     @PutMapping("/owners/{id}")
     public ResponseEntity<Repair> updateRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
-        Optional<Owner> ownerOptional = ownerService.findOwnerById(id);
-
-        if (ownerOptional.isPresent()) {
-            Owner owner = ownerOptional.get();
-
-            if (repair.getProperty() != null) {
-                // Set the owner to the property of the repair
-                repair.getProperty().setOwner(owner);
-            } else {
-                // If property is null, handle it (optional)
-                return ResponseEntity.badRequest().build();
-            }
-            Repair updatedRepair = repairService.updateRepair(repair);
+        try {
+            Repair updatedRepair = repairService.updateRepairWithOwner(id, repair);
             return ResponseEntity.ok(updatedRepair);
-        } else {
+        } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 

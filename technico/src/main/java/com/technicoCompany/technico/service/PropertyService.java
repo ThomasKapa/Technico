@@ -17,4 +17,6 @@ public interface PropertyService extends BaseServise<Property, Long>{
     boolean deletePropertyById(Long propertyId);
 
     boolean deletePropertyByOwnerVat(String vatNumber);
+
+    Property updatePropertyByVatNumber(String vatNumber, Property property);
 }

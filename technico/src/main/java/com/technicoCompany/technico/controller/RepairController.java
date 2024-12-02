@@ -40,7 +40,7 @@ public class RepairController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/new/repair")
     public ResponseEntity<Repair> createRepair(@RequestBody Repair repair) {
         Repair createdRepair = repairService.createRepair(repair);
         return ResponseEntity.created(URI.create("/repairs/" + createdRepair.getId()))

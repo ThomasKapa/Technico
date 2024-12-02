@@ -37,7 +37,7 @@ public class PropertyController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/new/property")
     public ResponseEntity<Property> createProperty(@RequestBody Property property) {
         Property createdProperty = propertyService.createProperty(property);
         return ResponseEntity.created(URI.create("/properties/" + createdProperty.getId()))

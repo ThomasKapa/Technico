@@ -41,7 +41,7 @@ public class UserController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/new/user")
     public ResponseEntity<Owner> createUser(@RequestBody Owner propertyOwner) {
         Owner createdOwner = ownerService.createUser(propertyOwner);
         return ResponseEntity.created(URI.create("/users/" + createdOwner.getId()))

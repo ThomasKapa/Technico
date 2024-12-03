@@ -1,8 +1,10 @@
 package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.ResourceNotFoundException;
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Repair;
 import com.technicoCompany.technico.repository.RepairRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class RepairServiceImpl extends BaseServiceImpl<Repair> implements RepairService {
 
     private final RepairRepository repairRepository;
+
+    private final OwnerService ownerService;
 
     @Override
     protected JpaRepository<Repair, Long> getRepository() {
@@ -103,12 +107,22 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
     @Override
     public boolean deleteRepairsByDateRange(LocalDateTime start, LocalDateTime end) {
         Optional<Repair> repair = repairRepository.findOneRepairByRangeOfDates(start, end);
-       if (repair.isPresent()){
-        repairRepository.delete(repair.get());
-        return true;
+        if (repair.isPresent()) {
+            repairRepository.delete(repair.get());
+            return true;
+        }
+        return false;
     }
-    return false;
+
+    @Transactional
+    public Repair updateRepairWithOwner(Long ownerId, Repair repair) {
+        Owner owner = ownerService.findOwnerById(ownerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Owner not found"));
+        if (repair.getProperty() == null) {
+            throw new IllegalArgumentException("Property cannot be null");
+        }
+        repair.getProperty().setOwner(owner);
+        return updateRepair(repair);
+    }
 }
 
-
-}

@@ -1,6 +1,8 @@
 package com.technicoCompany.technico.service;
 
 import com.technicoCompany.technico.exception.InvalidIdException;
+import com.technicoCompany.technico.exception.InvalidVatNumberException;
+import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.repository.PropertyRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class PropertyServiceImpl extends BaseServiceImpl<Property> implements PropertyService {
 
     private final PropertyRepository propertyRepository;
+    private final OwnerService ownerService;
 
     @Override
     protected JpaRepository<Property, Long> getRepository() {
@@ -73,5 +76,16 @@ public class PropertyServiceImpl extends BaseServiceImpl<Property> implements Pr
         return false;
     }
 
+    public Property updatePropertyByVatNumber(String vatNumber, Property property) {
+        // Find the owner by VAT number
+        Owner owner = ownerService.findUserByVatNumber(vatNumber)
+                .orElseThrow(() -> new InvalidVatNumberException("Owner with VAT " + vatNumber + " not found"));
+
+        // Set the owner to the property
+        property.setOwner(owner);
+
+        // Update the property (reuse the update logic)
+        return updateProperty(property);
+    }
 
 }

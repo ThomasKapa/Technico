@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.exception.InvalidIdException;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.service.OwnerService;
@@ -36,7 +37,7 @@ public class PropertyController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/new/property")
     public ResponseEntity<Property> createProperty(@RequestBody Property property) {
         Property createdProperty = propertyService.createProperty(property);
         return ResponseEntity.created(URI.create("/properties/" + createdProperty.getId()))
@@ -79,15 +80,11 @@ public class PropertyController {
 
 
     @PutMapping("/owner/{vatNumber}")
-    public ResponseEntity<Property> updatePropertyByVatnumber(@PathVariable String vatNumber, @RequestBody Property property) {
-        Optional<Owner> ownerOptional = ownerService.findUserByVatNumber(vatNumber);
-
-        if (ownerOptional.isPresent()) {
-            Owner owner = ownerOptional.get();
-            property.setOwner(owner);
-            Property updatedProperty = propertyService.updateProperty(property);
+    public ResponseEntity<Property> updatePropertyByVatNumber(@PathVariable String vatNumber, @RequestBody Property property) {
+        try {
+            Property updatedProperty = propertyService.updatePropertyByVatNumber(vatNumber, property);
             return ResponseEntity.ok(updatedProperty);
-        } else {
+        } catch (InvalidIdException e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -29,4 +29,6 @@ public interface RepairService extends BaseServise<Repair, Long> {
     boolean deleteRepairByOwnerId(Long id);
 
     boolean deleteRepairsByDateRange(LocalDateTime start, LocalDateTime end);
+
+    Repair  updateRepairWithOwner(Long ownerId, Repair repair);
 }

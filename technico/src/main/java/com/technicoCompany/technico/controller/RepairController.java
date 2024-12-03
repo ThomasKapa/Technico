@@ -1,5 +1,6 @@
 package com.technicoCompany.technico.controller;
 
+import com.technicoCompany.technico.exception.ResourceNotFoundException;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.model.Repair;
@@ -39,7 +40,7 @@ public class RepairController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/new/repair")
     public ResponseEntity<Repair> createRepair(@RequestBody Repair repair) {
         Repair createdRepair = repairService.createRepair(repair);
         return ResponseEntity.created(URI.create("/repairs/" + createdRepair.getId()))
@@ -57,7 +58,7 @@ public class RepairController {
         }
     }
 
-    @GetMapping("/owner/{id}")
+    @GetMapping("/owners/{id}")
     public ResponseEntity<List<Repair>> getRepairsByOwnerVat(@PathVariable Long id) {
         List<Repair> repairs = repairService.findRepairsByOwnerId(id);
         if (repairs.isEmpty()) {
@@ -86,24 +87,15 @@ public class RepairController {
         return ResponseEntity.ok(repairService.updateRepair(repair));
     }
 
-    @PutMapping("/owner/{id}")
+    @PutMapping("/owners/{id}")
     public ResponseEntity<Repair> updateRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
-        Optional<Owner> ownerOptional = ownerService.findOwnerById(id);
-
-        if (ownerOptional.isPresent()) {
-            Owner owner = ownerOptional.get();
-
-            if (repair.getProperty() != null) {
-                // Set the owner to the property of the repair
-                repair.getProperty().setOwner(owner);
-            } else {
-                // If property is null, handle it (optional)
-                return ResponseEntity.badRequest().build();
-            }
-            Repair updatedRepair = repairService.updateRepair(repair);
+        try {
+            Repair updatedRepair = repairService.updateRepairWithOwner(id, repair);
             return ResponseEntity.ok(updatedRepair);
-        } else {
+        } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
@@ -150,7 +142,7 @@ public class RepairController {
     }
 
 
-    @DeleteMapping("/owner/{id}")
+    @DeleteMapping("/owners/{id}")
     public ResponseEntity<Void> deleteRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
         boolean isDeleted = repairService.deleteRepairByOwnerId(id);
         if (isDeleted) {

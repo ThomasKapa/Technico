@@ -1,18 +1,16 @@
 package com.technicoCompany.technico.controller;
 
 import com.technicoCompany.technico.exception.InvalidIdException;
-import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.service.OwnerService;
-import com.technicoCompany.technico.service.OwnerServiceImpl;
 import com.technicoCompany.technico.service.PropertyService;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/properties")
@@ -26,6 +24,7 @@ public class PropertyController {
         this.ownerService = ownerService;
     }
 
+    @Transactional
     @GetMapping
     public ResponseEntity<List<Property>> getAllProperties() {
         List<Property> properties = propertyService.findAll();

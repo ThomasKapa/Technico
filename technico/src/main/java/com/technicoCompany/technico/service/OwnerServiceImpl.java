@@ -77,7 +77,8 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
         }
 
         if (updatedOwner.getEmail() != null) {
-            if (ownerRepository.existsByEmail(updatedOwner.getEmail())) {
+            if (!updatedOwner.getEmail().equals(existingOwner.getEmail()) &&
+                    ownerRepository.existsByEmail(updatedOwner.getEmail())) {
                 throw new UserAlreadyExistsException("Email '" + updatedOwner.getEmail() + "' already exists");
             }
             existingOwner.setEmail(updatedOwner.getEmail());

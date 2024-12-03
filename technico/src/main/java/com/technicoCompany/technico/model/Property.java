@@ -41,7 +41,7 @@ public class Property extends BaseModel {
 
     @OneToMany(mappedBy = "property",
             fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+
     private List<Repair> repairs;
 
 }

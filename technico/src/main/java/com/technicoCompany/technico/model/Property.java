@@ -1,6 +1,7 @@
 package com.technicoCompany.technico.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.technicoCompany.technico.enumeration.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,13 +35,13 @@ public class Property extends BaseModel {
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne/*(fetch = FetchType.LAZY, optional = false)*/
     @JoinColumn(name = "ownerId", nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties("properties")
     private Owner owner;
 
     @OneToMany(mappedBy = "property",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+            /*fetch = FetchType.LAZY,*/ cascade = CascadeType.ALL, orphanRemoval = true)
 
     private List<Repair> repairs;
 

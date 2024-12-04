@@ -1,11 +1,13 @@
 package com.technicoCompany.technico.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.technicoCompany.technico.enumeration.RepairStatus;
 import com.technicoCompany.technico.enumeration.RepairType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,10 +45,11 @@ public class Repair extends BaseModel{
     @Column(length = 500)
     private String workToBeDone;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(/*fetch =FetchType.LAZY,*/ optional = false)
     @JoinColumn(name = "propertyId", nullable = false)
     @NotNull(message = "Property cannot be null")
-    @JsonIgnore
+    @JsonIgnoreProperties("repairs")
+    @ToStringExclude
     private Property property;
 
 }

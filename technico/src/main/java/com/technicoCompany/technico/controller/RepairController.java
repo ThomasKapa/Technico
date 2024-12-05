@@ -58,6 +58,17 @@ public class RepairController {
         }
     }
 
+    @GetMapping("/propertyId/{id}")
+    public ResponseEntity<List<Repair>>getRepairsByPropertyId(@PathVariable("id") Long id){
+        List<Repair> repairs = repairService.findRepairByPropertyId(id);
+        if (repairs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(repairs);
+    }
+
+
+
     @GetMapping("/owners/{id}")
     public ResponseEntity<List<Repair>> getRepairsByOwnerVat(@PathVariable Long id) {
         List<Repair> repairs = repairService.findRepairsByOwnerId(id);

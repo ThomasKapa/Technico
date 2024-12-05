@@ -53,14 +53,14 @@ public class OwnerPropertyRepairCreator extends BaseComponent implements Command
 
         List<Property> staringProperties = List.of(
                 Property.builder().propertyIdentificationE9Number("E9-12345").address("Kifisias 100, Athens").yearOfConstruction("2000").propertyType(PropertyType.DETACHED).owner(startingOwners.get(0)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12346").address("Vouliagmenis 50, Athens").yearOfConstruction("1995").propertyType(PropertyType.FLAT).owner(startingOwners.get(9)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12347").address("Patission 20, Athens").yearOfConstruction("2010").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12346").address("Vouliagmenis 50, Athens").yearOfConstruction("1995").propertyType(PropertyType.MAISONETTE).owner(startingOwners.get(9)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12347").address("Patission 20, Athens").yearOfConstruction("2010").propertyType(PropertyType.MAISONETTE).owner(startingOwners.get(10)).build(),
                 Property.builder().propertyIdentificationE9Number("E9-12348").address("Panepistimiou 15, Athens").yearOfConstruction("1980").propertyType(PropertyType.DETACHED).owner(startingOwners.get(9)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12349").address("Syntagma Square 1, Athens").yearOfConstruction("2020").propertyType(PropertyType.FLAT).owner(startingOwners.get(2)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12350").address("Exarchia 5, Athens").yearOfConstruction("1990").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12349").address("Syntagma Square 1, Athens").yearOfConstruction("2020").propertyType(PropertyType.APARTMENT).owner(startingOwners.get(2)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12350").address("Exarchia 5, Athens").yearOfConstruction("1990").propertyType(PropertyType.APARTMENT).owner(startingOwners.get(10)).build(),
                 Property.builder().propertyIdentificationE9Number("E9-12351").address("Kolonaki 22, Athens").yearOfConstruction("2005").propertyType(PropertyType.DETACHED).owner(startingOwners.get(3)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12352").address("Piraeus 10, Athens").yearOfConstruction("1975").propertyType(PropertyType.FLAT).owner(startingOwners.get(4)).build(),
-                Property.builder().propertyIdentificationE9Number("E9-12353").address("Ampelokipoi 33, Athens").yearOfConstruction("2015").propertyType(PropertyType.SEMI_DETACHED).owner(startingOwners.get(10)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12352").address("Piraeus 10, Athens").yearOfConstruction("1975").propertyType(PropertyType.APARTMENT).owner(startingOwners.get(4)).build(),
+                Property.builder().propertyIdentificationE9Number("E9-12353").address("Ampelokipoi 33, Athens").yearOfConstruction("2015").propertyType(PropertyType.MAISONETTE).owner(startingOwners.get(10)).build(),
                 Property.builder().propertyIdentificationE9Number("E9-12354").address("Glyfada 88, Athens").yearOfConstruction("1998").propertyType(PropertyType.DETACHED).owner(startingOwners.get(7)).build());
 
         propertyService.createAll(staringProperties);

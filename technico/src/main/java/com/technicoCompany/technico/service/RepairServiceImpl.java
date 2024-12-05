@@ -124,5 +124,11 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
         repair.getProperty().setOwner(owner);
         return updateRepair(repair);
     }
+
+    @Override
+    public List<Repair> findRepairByPropertyId(Long id) {
+        return repairRepository.findRepairsByPropertyId(id);
+    }
+
 }
 

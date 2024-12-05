@@ -64,7 +64,7 @@ public class PropertyController {
         return ResponseEntity.ok(properties);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}/update")
     public ResponseEntity<Property> updatePropertyById(@PathVariable Long id, @RequestBody Property property) {
         Optional<Property> existingProperty = propertyService.findPropertyById(id);
 

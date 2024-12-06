@@ -162,7 +162,7 @@ public class RepairController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/properties/{id}")
+    @DeleteMapping("/property/{id}")
     public ResponseEntity<Void> deleteRepairByPropertyId(@PathVariable Long id, @RequestBody Repair repair) {
         boolean isDeleted = repairService.deleteRepairByPropertyId(id);
         if (isDeleted) {

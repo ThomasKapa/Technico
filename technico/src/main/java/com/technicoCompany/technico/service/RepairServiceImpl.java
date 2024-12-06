@@ -130,5 +130,16 @@ public class RepairServiceImpl extends BaseServiceImpl<Repair> implements Repair
         return repairRepository.findRepairsByPropertyId(id);
     }
 
+    @Override
+    public boolean deleteRepairByPropertyId(Long id) {
+        Optional<Repair> repair = repairRepository.findRepairByPropertyId(id);
+        if (repair.isPresent()) {
+            repairRepository.delete(repair.get());
+            return true;
+        }
+        return false;
+
+    }
+
 }
 

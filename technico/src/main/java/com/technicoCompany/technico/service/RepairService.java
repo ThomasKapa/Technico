@@ -33,4 +33,6 @@ public interface RepairService extends BaseServise<Repair, Long> {
     Repair  updateRepairWithOwner(Long ownerId, Repair repair);
 
     List<Repair> findRepairByPropertyId(Long id);
+
+    boolean deleteRepairByPropertyId(Long id);
 }

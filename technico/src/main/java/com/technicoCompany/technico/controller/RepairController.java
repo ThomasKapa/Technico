@@ -99,7 +99,6 @@ public class RepairController {
     }
 
     @PutMapping("/owners/{id}")
-    // todo PUT/repairs/owners/{id}
     public ResponseEntity<Repair> updateRepairByOwnerId(@PathVariable Long id, @RequestBody Repair repair) {
         try {
             Repair updatedRepair = repairService.updateRepairWithOwner(id, repair);
@@ -162,6 +161,16 @@ public class RepairController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/properties/{id}")
+    public ResponseEntity<Void> deleteRepairByPropertyId(@PathVariable Long id, @RequestBody Repair repair) {
+        boolean isDeleted = repairService.deleteRepairByPropertyId(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
 
 

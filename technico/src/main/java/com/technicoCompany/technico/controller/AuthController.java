@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,6 +24,24 @@ public class AuthController {
     }
 
 
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+//        Optional<Owner> adminOwner = ownerService.findAllPropertyOwners().stream()
+//                .filter(owner -> owner.getUserName().equals(loginRequest.getUsername())
+//                        && owner.getPassword().equals(loginRequest.getPassword()))
+//                .findFirst();
+//
+//        if (adminOwner.isPresent()) {
+//            if (adminOwner.get().getRole() == UserRole.ADMIN) {
+//                return ResponseEntity.ok(Map.of("role", "ADMIN"));
+//            } else if (adminOwner.get().getRole() == UserRole.PROPERTY_OWNER) {
+//                return ResponseEntity.ok(Map.of("role", "OWNER"));
+//            }
+//        }
+//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+//    }
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         Optional<Owner> adminOwner = ownerService.findAllPropertyOwners().stream()
@@ -31,11 +50,11 @@ public class AuthController {
                 .findFirst();
 
         if (adminOwner.isPresent()) {
-            if (adminOwner.get().getRole() == UserRole.ADMIN) {
-                return ResponseEntity.ok(Map.of("role", "ADMIN"));
-            } else if (adminOwner.get().getRole() == UserRole.PROPERTY_OWNER) {
-                return ResponseEntity.ok(Map.of("role", "OWNER"));
-            }
+            Owner owner = adminOwner.get();
+            Map<String, Object> response = new HashMap<>();
+            response.put("role", owner.getRole().name());
+            response.put("vatNumber", owner.getVatNumber());
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }

@@ -22,20 +22,24 @@ public class AuthController {
         this.ownerService = ownerService;
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         Optional<Owner> adminOwner = ownerService.findAllPropertyOwners().stream()
-                .filter(owner -> owner.getRole() == UserRole.ADMIN
-                        && owner.getUserName().equals(loginRequest.getUsername())
+                .filter(owner -> owner.getUserName().equals(loginRequest.getUsername())
                         && owner.getPassword().equals(loginRequest.getPassword()))
                 .findFirst();
 
         if (adminOwner.isPresent()) {
-            return ResponseEntity.ok(Map.of("role", "ADMIN"));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+            if (adminOwner.get().getRole() == UserRole.ADMIN) {
+                return ResponseEntity.ok(Map.of("role", "ADMIN"));
+            } else if (adminOwner.get().getRole() == UserRole.PROPERTY_OWNER) {
+                return ResponseEntity.ok(Map.of("role", "OWNER"));
+            }
         }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+
 
 
     public static class LoginRequest {

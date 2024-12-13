@@ -1,6 +1,6 @@
 package com.technicoCompany.technico.model;
 
-import com.technicoCompany.technico.controller.enumeration.UserRole;
+import com.technicoCompany.technico.enumeration.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 

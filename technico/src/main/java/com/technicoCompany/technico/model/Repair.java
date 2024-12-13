@@ -1,8 +1,8 @@
 package com.technicoCompany.technico.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.technicoCompany.technico.controller.enumeration.RepairStatus;
-import com.technicoCompany.technico.controller.enumeration.RepairType;
+import com.technicoCompany.technico.enumeration.RepairStatus;
+import com.technicoCompany.technico.enumeration.RepairType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

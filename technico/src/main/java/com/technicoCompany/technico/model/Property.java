@@ -1,7 +1,7 @@
 package com.technicoCompany.technico.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.technicoCompany.technico.controller.enumeration.PropertyType;
+import com.technicoCompany.technico.enumeration.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 

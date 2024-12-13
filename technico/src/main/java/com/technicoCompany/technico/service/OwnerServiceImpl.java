@@ -68,21 +68,8 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
         if (updatedOwner.getFirstName() != null) existingOwner.setFirstName(updatedOwner.getFirstName());
         if (updatedOwner.getLastName() != null) existingOwner.setLastName(updatedOwner.getLastName());
         if (updatedOwner.getAddress() != null) existingOwner.setAddress(updatedOwner.getAddress());
-
-        if (updatedOwner.getPhoneNumber() != null) {
-            if (ownerRepository.existsByPhoneNumber(updatedOwner.getPhoneNumber())) {
-                throw new UserAlreadyExistsException("Phone number '" + updatedOwner.getPhoneNumber() + "' already exists");
-            }
-            existingOwner.setPhoneNumber(updatedOwner.getPhoneNumber());
-        }
-
-        if (updatedOwner.getEmail() != null) {
-            if (!updatedOwner.getEmail().equals(existingOwner.getEmail()) &&
-                    ownerRepository.existsByEmail(updatedOwner.getEmail())) {
-                throw new UserAlreadyExistsException("Email '" + updatedOwner.getEmail() + "' already exists");
-            }
-            existingOwner.setEmail(updatedOwner.getEmail());
-        }
+        if (updatedOwner.getPhoneNumber() != null) existingOwner.setPhoneNumber(updatedOwner.getPhoneNumber());
+        if (updatedOwner.getEmail() != null) existingOwner.setEmail(updatedOwner.getEmail());
 
         return ownerRepository.save(existingOwner);
     }

@@ -1,9 +1,8 @@
 package com.technicoCompany.technico.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.technicoCompany.technico.enumeration.RepairStatus;
-import com.technicoCompany.technico.enumeration.RepairType;
+import com.technicoCompany.technico.controller.enumeration.RepairStatus;
+import com.technicoCompany.technico.controller.enumeration.RepairType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -11,7 +10,6 @@ import org.apache.commons.lang3.builder.ToStringExclude;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter

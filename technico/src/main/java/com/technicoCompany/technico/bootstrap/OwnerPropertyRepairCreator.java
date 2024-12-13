@@ -1,10 +1,10 @@
 package com.technicoCompany.technico.bootstrap;
 
 import com.technicoCompany.technico.base.BaseComponent;
-import com.technicoCompany.technico.enumeration.PropertyType;
-import com.technicoCompany.technico.enumeration.RepairStatus;
-import com.technicoCompany.technico.enumeration.RepairType;
-import com.technicoCompany.technico.enumeration.UserRole;
+import com.technicoCompany.technico.controller.enumeration.PropertyType;
+import com.technicoCompany.technico.controller.enumeration.RepairStatus;
+import com.technicoCompany.technico.controller.enumeration.RepairType;
+import com.technicoCompany.technico.controller.enumeration.UserRole;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.model.Property;
 import com.technicoCompany.technico.model.Repair;
@@ -13,7 +13,6 @@ import com.technicoCompany.technico.service.RepairService;
 import com.technicoCompany.technico.service.OwnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

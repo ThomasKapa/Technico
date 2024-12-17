@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -98,7 +99,7 @@ public class OwnerServiceImpl extends BaseServiceImpl<Owner> implements OwnerSer
 
     @Override
     public Set<Owner> findAllPropertyOwners() {
-        return new HashSet<>(ownerRepository.findAll());
+        return new LinkedHashSet<>(ownerRepository.findAll());
     }
 
     @Override

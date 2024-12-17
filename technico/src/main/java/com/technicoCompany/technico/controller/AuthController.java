@@ -1,6 +1,5 @@
 package com.technicoCompany.technico.controller;
 
-import com.technicoCompany.technico.enumeration.UserRole;
 import com.technicoCompany.technico.model.Owner;
 import com.technicoCompany.technico.service.OwnerService;
 import org.springframework.http.HttpStatus;
@@ -54,6 +53,7 @@ public class AuthController {
             Map<String, Object> response = new HashMap<>();
             response.put("role", owner.getRole().name());
             response.put("vatNumber", owner.getVatNumber());
+            response.put("id",owner.getId());
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
